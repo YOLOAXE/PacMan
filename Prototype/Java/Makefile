@@ -45,18 +45,18 @@ $(BUILD)MODEL/Consumable.class: $(SRC)MODEL/Consumable.java
 $(BUILD)CONTROLER/Behaviour.class: $(SRC)CONTROLER/Behaviour.java
 	$(JC) $(JFLAGS) $(SRC)CONTROLER/Behaviour.java
 
+$(BUILD)CONTROLER/GameManager.class: $(SRC)CONTROLER/GameManager.java $(BUILD)CONTROLER/Behaviour.class
+	$(JC) $(JFLAGS) $(SRC)CONTROLER/GameManager.java
+
 
 run : 
 	java fr.upec.PacMan.test.Main
-
+#fonctionne pas à corriger
 jar:
 	jar cvfe $(Name).jar fr.upec.PacMan.test.Main -C build fr -C res Data
 
 runjar:
 	java -jar $(Name).jar
-
-runtest :
-	$(allTest)
 
 clean:
 	rm -rf $(BUILD)

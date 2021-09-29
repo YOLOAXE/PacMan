@@ -1,4 +1,4 @@
-package fr.upec.PacMan.VUE.test;
+package fr.upec.PacMan.test;
 import fr.upec.PacMan.VUE.*;
 
 public class Main 
