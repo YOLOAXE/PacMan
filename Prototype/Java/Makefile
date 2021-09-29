@@ -18,8 +18,33 @@ $(BUILD)test/Main.class: $(SRC)test/Main.java $(BUILD)VUE/Window.class
 $(BUILD)VUE/Window.class: $(SRC)VUE/Window.java $(BUILD)MODEL/Constant.class
 	$(JC) $(JFLAGS) $(SRC)VUE/Window.java
 
+$(BUILD)MODEL/Actor.class: $(SRC)MODEL/Actor.java $(BUILD)MODEL/Entity.class $(BUILD)CONTROLER/Behaviour.class
+	$(JC) $(JFLAGS) $(SRC)MODEL/Actor.java
+
+$(BUILD)MODEL/EffetObject.class: $(SRC)MODEL/EffetObject.java $(BUILD)MODEL/Actor.class
+	$(JC) $(JFLAGS) $(SRC)MODEL/EffetObject.java
+
+$(BUILD)MODEL/Entity.class: $(SRC)MODEL/Entity.java $(BUILD)MODEL/Vector2.class
+	$(JC) $(JFLAGS) $(SRC)MODEL/Entity.java
+
+$(BUILD)MODEL/Player.class: $(SRC)MODEL/Player.java $(BUILD)MODEL/Actor.class
+	$(JC) $(JFLAGS) $(SRC)MODEL/Player.java
+
 $(BUILD)MODEL/Constant.class: $(SRC)MODEL/Constant.java
 	$(JC) $(JFLAGS) $(SRC)MODEL/Constant.java
+
+$(BUILD)MODEL/Vector2.class: $(SRC)MODEL/Vector2.java
+	$(JC) $(JFLAGS) $(SRC)MODEL/Vector2.java
+
+$(BUILD)MODEL/Direction.class: $(SRC)MODEL/Direction.java
+	$(JC) $(JFLAGS) $(SRC)MODEL/Direction.java
+
+$(BUILD)MODEL/Consumable.class: $(SRC)MODEL/Consumable.java
+	$(JC) $(JFLAGS) $(SRC)MODEL/Consumable.java
+
+$(BUILD)CONTROLER/Behaviour.class: $(SRC)CONTROLER/Behaviour.java
+	$(JC) $(JFLAGS) $(SRC)CONTROLER/Behaviour.java
+
 
 run : 
 	java fr.upec.PacMan.test.Main

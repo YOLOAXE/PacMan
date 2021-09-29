@@ -1,5 +1,11 @@
 package fr.upec.PacMan.MODEL;
 
+/*
+ * Nom de classe : Constant
+ *
+ * Description   : Les constantes du projet
+ */
+
 public class Constant 
 {
 	public static final int HAUTEUR_BASE_FENETRE = 900;
