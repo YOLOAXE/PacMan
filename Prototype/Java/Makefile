@@ -12,13 +12,13 @@ allclass = \
 
 default: $(allclass)
 
-$(BUILD)test/Main.class: $(SRC)test/Main.java $(BUILD)VUE/Window.class
+$(BUILD)test/Main.class: $(SRC)test/Main.java $(BUILD)CONTROLEUR/GameManager.class
 	$(JC) $(JFLAGS) $(SRC)test/Main.java
 
 $(BUILD)VUE/Window.class: $(SRC)VUE/Window.java $(BUILD)MODEL/Constant.class
 	$(JC) $(JFLAGS) $(SRC)VUE/Window.java
 
-$(BUILD)MODEL/Actor.class: $(SRC)MODEL/Actor.java $(BUILD)MODEL/Entity.class $(BUILD)CONTROLER/Behaviour.class
+$(BUILD)MODEL/Actor.class: $(SRC)MODEL/Actor.java $(BUILD)MODEL/Entity.class $(BUILD)CONTROLEUR/Behaviour.class
 	$(JC) $(JFLAGS) $(SRC)MODEL/Actor.java
 
 $(BUILD)MODEL/EffetObject.class: $(SRC)MODEL/EffetObject.java $(BUILD)MODEL/Actor.class
@@ -42,16 +42,16 @@ $(BUILD)MODEL/Direction.class: $(SRC)MODEL/Direction.java
 $(BUILD)MODEL/Consumable.class: $(SRC)MODEL/Consumable.java
 	$(JC) $(JFLAGS) $(SRC)MODEL/Consumable.java
 
-$(BUILD)CONTROLER/Behaviour.class: $(SRC)CONTROLER/Behaviour.java
-	$(JC) $(JFLAGS) $(SRC)CONTROLER/Behaviour.java
+$(BUILD)CONTROLEUR/Behaviour.class: $(SRC)CONTROLEUR/Behaviour.java
+	$(JC) $(JFLAGS) $(SRC)CONTROLEUR/Behaviour.java
 
-$(BUILD)CONTROLER/GameManager.class: $(SRC)CONTROLER/GameManager.java $(BUILD)CONTROLER/Behaviour.class
-	$(JC) $(JFLAGS) $(SRC)CONTROLER/GameManager.java
+$(BUILD)CONTROLEUR/GameManager.class: $(SRC)CONTROLEUR/GameManager.java $(BUILD)CONTROLEUR/Behaviour.class $(BUILD)VUE/Window.class
+	$(JC) $(JFLAGS) $(SRC)CONTROLEUR/GameManager.java
 
 
 run : 
 	java fr.upec.PacMan.test.Main
-#fonctionne pas à corriger
+#fonctionne pas ï¿½ corriger
 jar:
 	jar cvfe $(Name).jar fr.upec.PacMan.test.Main -C build fr -C res Data
 

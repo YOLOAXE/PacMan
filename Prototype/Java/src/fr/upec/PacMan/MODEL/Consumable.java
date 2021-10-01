@@ -10,7 +10,12 @@ public class Consumable
 {
 	protected int m_consomeScore;
 
-	Consumable(int score = 0)
+	Consumable(int score)
+	{
+		m_consomeScore = 0;
+	}
+
+	Consumable(int score)
 	{
 		m_consomeScore = score;
 	}
