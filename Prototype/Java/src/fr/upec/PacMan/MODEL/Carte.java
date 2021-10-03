@@ -12,7 +12,7 @@ public class Carte
     private Consumable[][] m_consumables;
     private int m_hauteur;
     private int m_largeur;
-    private map<Vector2,Vector2> m_mapTeleportation = new map<Vector2,Vector2>();
+    private Map<Vector2,Vector2> m_mapTeleportation = new Map<Vector2,Vector2>();
 
     Carte(String path)
     {
