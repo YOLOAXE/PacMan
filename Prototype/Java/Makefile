@@ -62,8 +62,8 @@ $(BUILD)CONTROLEUR/GameManager.class: $(SRC)CONTROLEUR/GameManager.java $(BUILD)
 
 
 run : 
-	java fr.upec.PacMan.test.Main
-#fonctionne pas � corriger
+	java -cp build fr.upec.PacMan.test.Main
+
 jar:
 	jar cvfe $(Name).jar fr.upec.PacMan.test.Main -C build fr -C res Data
 

@@ -31,9 +31,10 @@ public class GameGraphics extends JComponent implements PanelWindow
 		Graphics secondPinceau = pinceau.create();
 		if (this.isOpaque())
 		{
-      		secondPinceau.setColor(new Color(0,0,0));
+      		secondPinceau.setColor(Color.white);
       		secondPinceau.fillRect(0, 0, this.getWidth(), this.getHeight());
         }
-		secondPinceau.setColor(Color.RED);
+		secondPinceau.setColor(Color.red);
+      	secondPinceau.fillRect(0, 0, this.getWidth(), this.getHeight());
 	}
 }
