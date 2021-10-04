@@ -1,5 +1,7 @@
 package fr.upec.PacMan.VUE;
 import javax.swing.*;
+import java.awt.*;
+import java.util.*;
 
 /*
  * Nom de classe : InfoGraphics
@@ -21,4 +23,16 @@ public class InfoGraphics extends JComponent implements PanelWindow
     {
         return m_infoPanel;
     }
+
+	@Override
+	protected void paintComponent(Graphics pinceau) 
+	{
+		Graphics secondPinceau = pinceau.create();
+		if (this.isOpaque())
+		{
+      		secondPinceau.setColor(new Color(0,0,0));
+      		secondPinceau.fillRect(0, 0, this.getWidth(), this.getHeight());
+        }
+		
+	}
 }

@@ -12,9 +12,11 @@ import java.awt.*;
 public class Window extends JFrame 
 {
 	private GridBagConstraints m_panelConstraint = new GridBagConstraints();
+	private GridBagLayout m_layout = new GridBagLayout();
 
 	public Window(PanelWindow gameGraphics,PanelWindow infoGraphics)
 	{
+	    this.setLayout(this.m_layout);
 		this.setSize(Constant.LARGEUR_BASE_FENETRE, Constant.HAUTEUR_BASE_FENETRE);
 	    this.setLocation(100, 100);
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

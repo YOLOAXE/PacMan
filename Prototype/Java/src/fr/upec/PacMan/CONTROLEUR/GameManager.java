@@ -1,5 +1,6 @@
 package fr.upec.PacMan.CONTROLEUR;
 import fr.upec.PacMan.VUE.*;
+import fr.upec.PacMan.MODEL.*;
 import java.util.*;
 
 /*
@@ -14,12 +15,13 @@ public class GameManager
 	private long m_lastTime = System.nanoTime();
 	private float m_deltaTime;
 	private Window m_window;
-	//private Carte m_carte;
+	private Carte m_carte;
 	private GameGraphics m_gameGraphics = new GameGraphics(); 
 	private InfoGraphics m_infoGraphics = new InfoGraphics(); 
 
 	public GameManager()
 	{
+		this.m_carte = new Carte("Data/1.carte");
 		this.m_window = new Window(m_gameGraphics,m_infoGraphics);
 		this.m_window.setVisible(true);
 		Update();

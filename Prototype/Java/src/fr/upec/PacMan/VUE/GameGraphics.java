@@ -1,6 +1,8 @@
 package fr.upec.PacMan.VUE;
 import fr.upec.PacMan.MODEL.*;
 import javax.swing.*;
+import java.awt.*;
+import java.util.*;
 
 /*
  * Nom de classe : GameGraphics
@@ -22,4 +24,16 @@ public class GameGraphics extends JComponent implements PanelWindow
     {
         return m_gamePanel;
     }
+
+	@Override
+	protected void paintComponent(Graphics pinceau) 
+	{
+		Graphics secondPinceau = pinceau.create();
+		if (this.isOpaque())
+		{
+      		secondPinceau.setColor(new Color(0,0,0));
+      		secondPinceau.fillRect(0, 0, this.getWidth(), this.getHeight());
+        }
+		secondPinceau.setColor(Color.RED);
+	}
 }

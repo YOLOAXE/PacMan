@@ -10,7 +10,7 @@ public class Consumable
 {
 	protected int m_consomeScore;
 
-	Consumable(int score)
+	Consumable()
 	{
 		m_consomeScore = 0;
 	}

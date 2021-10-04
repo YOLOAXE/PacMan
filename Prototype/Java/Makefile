@@ -15,11 +15,23 @@ default: $(allclass)
 $(BUILD)test/Main.class: $(SRC)test/Main.java $(BUILD)CONTROLEUR/GameManager.class
 	$(JC) $(JFLAGS) $(SRC)test/Main.java
 
-$(BUILD)VUE/Window.class: $(SRC)VUE/Window.java $(BUILD)MODEL/Constant.class
+$(BUILD)VUE/Window.class: $(SRC)VUE/Window.java $(BUILD)MODEL/Constant.class $(BUILD)VUE/PanelWindow.class
 	$(JC) $(JFLAGS) $(SRC)VUE/Window.java
+
+$(BUILD)VUE/GameGraphics.class: $(SRC)VUE/GameGraphics.java $(BUILD)VUE/PanelWindow.class
+	$(JC) $(JFLAGS) $(SRC)VUE/GameGraphics.java
+
+$(BUILD)VUE/InfoGraphics.class: $(SRC)VUE/InfoGraphics.java $(BUILD)VUE/PanelWindow.class
+	$(JC) $(JFLAGS) $(SRC)VUE/InfoGraphics.java
+
+$(BUILD)VUE/PanelWindow.class: $(SRC)VUE/PanelWindow.java
+	$(JC) $(JFLAGS) $(SRC)VUE/PanelWindow.java
 
 $(BUILD)MODEL/Actor.class: $(SRC)MODEL/Actor.java $(BUILD)MODEL/Entity.class $(BUILD)CONTROLEUR/Behaviour.class
 	$(JC) $(JFLAGS) $(SRC)MODEL/Actor.java
+
+$(BUILD)MODEL/Carte.class: $(SRC)MODEL/Carte.java $(BUILD)MODEL/Consumable.class
+	$(JC) $(JFLAGS) $(SRC)MODEL/Carte.java
 
 $(BUILD)MODEL/EffetObject.class: $(SRC)MODEL/EffetObject.java $(BUILD)MODEL/Actor.class
 	$(JC) $(JFLAGS) $(SRC)MODEL/EffetObject.java
@@ -45,7 +57,7 @@ $(BUILD)MODEL/Consumable.class: $(SRC)MODEL/Consumable.java
 $(BUILD)CONTROLEUR/Behaviour.class: $(SRC)CONTROLEUR/Behaviour.java
 	$(JC) $(JFLAGS) $(SRC)CONTROLEUR/Behaviour.java
 
-$(BUILD)CONTROLEUR/GameManager.class: $(SRC)CONTROLEUR/GameManager.java $(BUILD)CONTROLEUR/Behaviour.class $(BUILD)VUE/Window.class
+$(BUILD)CONTROLEUR/GameManager.class: $(SRC)CONTROLEUR/GameManager.java $(BUILD)CONTROLEUR/Behaviour.class $(BUILD)VUE/Window.class $(BUILD)VUE/GameGraphics.class $(BUILD)VUE/InfoGraphics.class $(BUILD)MODEL/Carte.class
 	$(JC) $(JFLAGS) $(SRC)CONTROLEUR/GameManager.java
 
 
@@ -60,5 +72,6 @@ runjar:
 
 clean:
 	rm -rf $(BUILD)
+	rm -rf $(Name).jar
 
 .PHONY : but clean

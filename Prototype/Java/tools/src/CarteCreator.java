@@ -13,10 +13,12 @@ public class CarteCreator {
 		int largeur = 0;
 		int carteId [][] = new int[100][100];	
 		File file;
+		File outfile;
+		OutputStream outputStream = null;
 		InputStream inputStream = null;
 		BufferedReader reader = null;
 
-		if(args.length == 0)
+		if(args.length < 2)
 		{
 			System.out.println("file arg");
 			return;
@@ -66,7 +68,36 @@ public class CarteCreator {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("Re print from memory");
+		try 
+		{
+			outfile = new File(args[1]);
+			outputStream = new FileOutputStream(outfile);
+			outputStream.write(hauteur);
+			outputStream.write(largeur);
+			for(int i = 0; i < hauteur;i++)
+			{
+				for(int j = 0; j < largeur;j++)
+				{
+					outputStream.write(carteId[i][j]);
+				}
+			}
+		} 
+		catch (IOException ex) 
+		{
+            ex.printStackTrace();
+        }
+		if (outputStream != null) 
+		{
+			try 
+			{
+				outputStream.close();
+			} 
+			catch (IOException e) 
+			{
+				e.printStackTrace();
+			}
+		}
+		/*System.out.println("Re print from memory");
 		for(int i = 0; i < hauteur;i++)
 		{
 			for(int j = 0; j < largeur;j++)
@@ -74,6 +105,6 @@ public class CarteCreator {
 				System.out.print(carteId[i][j]+",");
 			}
 			System.out.println(" ");
-		}
+		}*/
 	}
 }

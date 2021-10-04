@@ -18,7 +18,7 @@ public class Vector2
         this.y = 0.0f;
     }
 
-	public Vector2(int tab[2]) 
+	public Vector2(int tab[]) 
 	{
         this.x = tab[0];
         this.y = tab[1];
