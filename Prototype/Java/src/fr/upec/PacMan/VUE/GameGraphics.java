@@ -13,6 +13,7 @@ import java.util.*;
 public class GameGraphics extends JComponent implements PanelWindow
 {	
 	private JPanel m_gamePanel = new JPanel();
+	private java.util.List<Rendering> entitysRendering = new ArrayList<Rendering>();
 
 	public GameGraphics()
 	{
@@ -25,6 +26,11 @@ public class GameGraphics extends JComponent implements PanelWindow
         return m_gamePanel;
     }
 
+	public void addArrayList(Rendering render)
+	{
+		entitysRendering.add(render);
+	}
+
 	@Override
 	protected void paintComponent(Graphics pinceau) 
 	{
@@ -36,5 +42,9 @@ public class GameGraphics extends JComponent implements PanelWindow
         }
 		secondPinceau.setColor(Color.red);
       	secondPinceau.fillRect(0, 0, this.getWidth(), this.getHeight());
+		for(Rendering r : entitysRendering)
+		{
+			r.render(secondPinceau);
+		}
 	}
 }

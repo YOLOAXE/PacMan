@@ -1,5 +1,10 @@
 package fr.upec.PacMan.MODEL;
 import java.util.*;
+
+import fr.upec.PacMan.VUE.Rendering;
+import javax.swing.*;
+import java.awt.*;
+
 import java.io.*;
 /*
  * Nom de classe : Carte
@@ -7,7 +12,7 @@ import java.io.*;
  * Description   : Carte dynamique des elements
  */
 
-public class Carte 
+public class Carte implements Rendering
 {
     private int m_spawnCarte[][];
     private Consumable m_consumables[][];	
@@ -69,4 +74,10 @@ public class Carte
     {
         return this.m_largeur;
     }
+
+	@Override
+	public void render(Graphics p)
+	{
+
+	}
 }

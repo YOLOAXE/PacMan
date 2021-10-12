@@ -18,8 +18,11 @@ $(BUILD)test/Main.class: $(SRC)test/Main.java $(BUILD)CONTROLEUR/GameManager.cla
 $(BUILD)VUE/Window.class: $(SRC)VUE/Window.java $(BUILD)MODEL/Constant.class $(BUILD)VUE/PanelWindow.class
 	$(JC) $(JFLAGS) $(SRC)VUE/Window.java
 
-$(BUILD)VUE/GameGraphics.class: $(SRC)VUE/GameGraphics.java $(BUILD)VUE/PanelWindow.class
+$(BUILD)VUE/GameGraphics.class: $(SRC)VUE/GameGraphics.java $(BUILD)VUE/PanelWindow.class $(BUILD)VUE/Rendering.class
 	$(JC) $(JFLAGS) $(SRC)VUE/GameGraphics.java
+
+$(BUILD)VUE/Rendering.class: $(SRC)VUE/Rendering.java
+	$(JC) $(JFLAGS) $(SRC)VUE/Rendering.java
 
 $(BUILD)VUE/InfoGraphics.class: $(SRC)VUE/InfoGraphics.java $(BUILD)VUE/PanelWindow.class
 	$(JC) $(JFLAGS) $(SRC)VUE/InfoGraphics.java
@@ -30,7 +33,7 @@ $(BUILD)VUE/PanelWindow.class: $(SRC)VUE/PanelWindow.java
 $(BUILD)MODEL/Actor.class: $(SRC)MODEL/Actor.java $(BUILD)MODEL/Entity.class $(BUILD)CONTROLEUR/Behaviour.class
 	$(JC) $(JFLAGS) $(SRC)MODEL/Actor.java
 
-$(BUILD)MODEL/Carte.class: $(SRC)MODEL/Carte.java $(BUILD)MODEL/Consumable.class
+$(BUILD)MODEL/Carte.class: $(SRC)MODEL/Carte.java $(BUILD)MODEL/Consumable.class $(BUILD)VUE/Rendering.class
 	$(JC) $(JFLAGS) $(SRC)MODEL/Carte.java
 
 $(BUILD)MODEL/EffetObject.class: $(SRC)MODEL/EffetObject.java $(BUILD)MODEL/Actor.class
@@ -51,7 +54,7 @@ $(BUILD)MODEL/Vector2.class: $(SRC)MODEL/Vector2.java
 $(BUILD)MODEL/Direction.class: $(SRC)MODEL/Direction.java
 	$(JC) $(JFLAGS) $(SRC)MODEL/Direction.java
 
-$(BUILD)MODEL/Consumable.class: $(SRC)MODEL/Consumable.java
+$(BUILD)MODEL/Consumable.class: $(SRC)MODEL/Consumable.java $(BUILD)VUE/Rendering.class
 	$(JC) $(JFLAGS) $(SRC)MODEL/Consumable.java
 
 $(BUILD)CONTROLEUR/Behaviour.class: $(SRC)CONTROLEUR/Behaviour.java

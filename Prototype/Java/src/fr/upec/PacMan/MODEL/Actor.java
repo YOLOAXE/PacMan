@@ -1,5 +1,6 @@
 package fr.upec.PacMan.MODEL;
 import fr.upec.PacMan.CONTROLEUR;
+import fr.upec.PacMan.VUE.Rendering;
 
 /*
  * Nom de classe : Actor
@@ -7,7 +8,7 @@ import fr.upec.PacMan.CONTROLEUR;
  * Description   : Le conportement des Entites en mouvement
  */
 
-public abstract class Actor extends Entity implements Behaviour
+public abstract class Actor extends Entity implements Behaviour,Rendering
 {
 	Actor(byte id,Vector2 pos)
 	{
@@ -23,5 +24,11 @@ public abstract class Actor extends Entity implements Behaviour
 	void update(float deltaTime)
 	{
 	
+	}
+
+	@Override
+	public void render(Graphics p)
+	{
+
 	}
 }
