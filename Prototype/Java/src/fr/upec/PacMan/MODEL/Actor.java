@@ -20,7 +20,7 @@ public abstract class Actor extends Entity implements Behaviour,Rendering
 	protected boolean m_move = false;
 	protected boolean m_nextState = false;
 	protected float m_timerDeplacement = 0;
-	private CarteCollider m_carteCollider;
+	protected CarteCollider m_carteCollider;
 	protected java.util.List<Integer> m_idWallCollide = new ArrayList<Integer>();
 	private boolean wraparound = false;
 

@@ -30,6 +30,9 @@ $(BUILD)VUE/InfoGraphics.class: $(SRC)VUE/InfoGraphics.java
 $(BUILD)MODEL/CarteCollider.class: $(SRC)MODEL/CarteCollider.java $(BUILD)MODEL/Consumable.class $(BUILD)MODEL/Vector2.class
 	$(JC) $(JFLAGS) $(SRC)MODEL/CarteCollider.java
 
+$(BUILD)MODEL/Node.class: $(SRC)MODEL/Node.java $(BUILD)MODEL/Vector2.class
+	$(JC) $(JFLAGS) $(SRC)MODEL/Node.java
+
 $(BUILD)MODEL/Actor.class: $(SRC)MODEL/Actor.java $(BUILD)MODEL/Entity.class $(BUILD)CONTROLEUR/Behaviour.class $(BUILD)VUE/Rendering.class $(BUILD)MODEL/Direction.class $(BUILD)MODEL/CarteCollider.class
 	$(JC) $(JFLAGS) $(SRC)MODEL/Actor.java
 
@@ -45,7 +48,7 @@ $(BUILD)MODEL/Entity.class: $(SRC)MODEL/Entity.java $(BUILD)MODEL/Vector2.class
 $(BUILD)MODEL/Player.class: $(SRC)MODEL/Player.java $(BUILD)MODEL/Actor.class
 	$(JC) $(JFLAGS) $(SRC)MODEL/Player.java
 
-$(BUILD)MODEL/Ghost.class: $(SRC)MODEL/Ghost.java $(BUILD)MODEL/Actor.class
+$(BUILD)MODEL/Ghost.class: $(SRC)MODEL/Ghost.java $(BUILD)MODEL/Actor.class $(BUILD)MODEL/Node.class
 	$(JC) $(JFLAGS) $(SRC)MODEL/Ghost.java
 
 $(BUILD)MODEL/Constant.class: $(SRC)MODEL/Constant.java

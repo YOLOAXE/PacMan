@@ -12,7 +12,7 @@ import java.awt.event.KeyListener;
 
 public class Player extends Actor implements KeyListener
 {
-	private int vie = 3;
+	private int vie = Constant.PACMAN_BASE_LIFE;
 
 	public Player(Vector2 pos,CarteCollider carteCollider)
 	{
