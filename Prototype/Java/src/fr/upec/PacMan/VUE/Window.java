@@ -2,17 +2,19 @@ package fr.upec.PacMan.VUE;
 import fr.upec.PacMan.MODEL.*;
 import javax.swing.*;
 import java.awt.*;
-
+import java.awt.event.WindowEvent;    
+import java.awt.event.WindowListener;   
 /*
  * Nom de classe : Window
  *
  * Description   : Cree une fenetre avec une taille de base constante
  */
 
-public class Window extends JFrame 
+public class Window extends JFrame implements WindowListener
 {
 	private GridBagConstraints m_panelConstraint = new GridBagConstraints();
 	private GridBagLayout m_layout = new GridBagLayout();
+	private boolean windowClosing = false;
 
 	public Window(JPanel gameGraphics,JPanel infoGraphics)
 	{
@@ -39,5 +41,35 @@ public class Window extends JFrame
 		m_panelConstraint.gridheight = 1;
 		this.add(infoGraphics, m_panelConstraint);
 		this.getContentPane().setBackground(new Color(100,100,100));
+		this.addWindowListener(this);
+	}
+
+	@Override
+	public void windowActivated (WindowEvent e) {}    
+  
+	@Override
+	public void windowClosed (WindowEvent e) {}    
+  
+	@Override
+	public void windowClosing (WindowEvent e) 
+	{
+		windowClosing = true;
+	}    
+  
+	@Override
+	public void windowDeactivated (WindowEvent e) {}    
+  
+	@Override
+	public void windowDeiconified (WindowEvent e) {}    
+  
+	@Override
+	public void windowIconified(WindowEvent e) {}  
+  
+	@Override
+	public void windowOpened(WindowEvent e) {}    
+
+	public boolean isClosing()
+	{
+		return windowClosing;
 	}
 }

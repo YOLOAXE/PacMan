@@ -2,6 +2,7 @@ package fr.upec.PacMan.MODEL;
 import java.util.*;
 
 import fr.upec.PacMan.VUE.Rendering;
+import fr.upec.PacMan.CONTROLEUR.Behaviour;
 import javax.swing.*;
 import java.awt.*;
 
@@ -21,6 +22,8 @@ public class Carte implements Rendering
 	private ClassLoader loader;
 	private final String CHEMIN_SIMPLE_RUN = "./res/";
 	private InputStream inputStream;
+
+	private java.util.List<Behaviour> m_behaviours = new ArrayList<Behaviour>();
 
     public Carte(String path)
     {
@@ -55,14 +58,14 @@ public class Carte implements Rendering
         }
     }
 
-	public Consumable[][] getConsumableCarte()
+	public Consumable getConsumableCarte(Vector2 vec)
 	{
-		return this.m_consumables;
+		return this.m_consumables[vec.getIntX()][vec.getIntY()];
 	}
 
-    public int[][] getSpawnCarte()
+    public int getSpawnCarte(Vector2 vec)
     {
-        return this.m_spawnCarte;
+        return this.m_spawnCarte[vec.getIntX()][vec.getIntY()];
     }
 
     public int getH()

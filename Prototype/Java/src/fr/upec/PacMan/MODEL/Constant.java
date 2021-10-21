@@ -24,4 +24,5 @@ public class Constant
 	public static final int LARGEUR_BASE_FENETRE = 800;
 	public static final int HAUTEUR_MINIMUM_FENETRE = 400;
 	public static final int LARGEUR_MINIMUM_FENETRE = 400;
+	public static final float FRAME_PAR_SECONDE = 1/60;
 }

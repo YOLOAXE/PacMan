@@ -30,9 +30,24 @@ public class Vector2
         this.y = y;
     }
 
+	public int getIntX()
+	{
+		return (int)this.x;
+	}
+
+	public int getIntY()
+	{
+		return (int)this.y;
+	}
+
     public boolean equals(Vector2 other)
 	{
         return (this.x == other.x && this.y == other.y);
+    }
+
+	public boolean equalsInt(Vector2 other)
+	{
+        return (this.getIntX() == other.getIntX() && this.getIntY() == other.getIntY());
     }
 
 	public float Distance(Vector2 other)
