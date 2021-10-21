@@ -20,7 +20,7 @@ public class CarteCreator {
 
 		if(args.length < 2)
 		{
-			System.out.println("file arg");
+			System.out.println("Usage : java CarteCreator <in.txt> <out.carte>");
 			return;
 		}
 

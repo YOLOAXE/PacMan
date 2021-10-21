@@ -13,7 +13,7 @@ package fr.upec.PacMan.MODEL;
     SOUTH,
     WEST;
 
-	private static final int DTOP[4][2] = { {0,-1}, {1,0}, {0,1}, {-1,0} };
+	private static final int DTOP[][] = { {0,-1}, {1,0}, {0,1}, {-1,0} };
 
     public Direction getOppositeDirection() 
 	{
@@ -21,8 +21,7 @@ package fr.upec.PacMan.MODEL;
     }
 
 	public Vector2 getPosDirection()
-	{
-		
-		return new Vector2(DTOP[this.ordinal()])
+	{		
+		return new Vector2(DTOP[this.ordinal()]);
 	}
 }

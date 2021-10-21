@@ -1,5 +1,5 @@
 package fr.upec.PacMan.MODEL;
-
+import java.awt.*;
 /*
  * Nom de classe : Constant
  *
@@ -25,4 +25,6 @@ public class Constant
 	public static final int HAUTEUR_MINIMUM_FENETRE = 400;
 	public static final int LARGEUR_MINIMUM_FENETRE = 400;
 	public static final float FRAME_PAR_SECONDE = 1/60;
+
+	public static final Color[] FANTOME_COLOR = { Color.red,Color.cyan,Color.orange,Color.pink};
 }

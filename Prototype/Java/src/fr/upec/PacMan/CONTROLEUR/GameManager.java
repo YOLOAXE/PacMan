@@ -11,7 +11,7 @@ import java.util.*;
 
 public class GameManager
 {
-	private List<Behaviour> m_behaviours = new ArrayList<Behaviour>();
+	private List<Behaviour> m_behaviours;
 	private long m_lastTime = System.nanoTime();
 	private long m_fixedLastTime = System.nanoTime();
 	private float m_deltaTime;
@@ -26,8 +26,9 @@ public class GameManager
 	public GameManager()
 	{
 		this.m_carte = new Carte("Data/1.carte");
-		m_gameGraphics.add(this.m_carte);
+		this.m_gameGraphics.add(this.m_carte);
 		this.m_window = new Window(m_gameGraphics,m_infoGraphics);
+		this.m_behaviours = new ArrayList<Behaviour>(this.m_carte.getBehaviours());
 		this.m_window.setVisible(true);
 	}
 

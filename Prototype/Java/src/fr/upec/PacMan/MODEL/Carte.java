@@ -22,8 +22,10 @@ public class Carte implements Rendering
 	private ClassLoader loader;
 	private final String CHEMIN_SIMPLE_RUN = "./res/";
 	private InputStream inputStream;
+	private int fs = 0;
 
 	private java.util.List<Behaviour> m_behaviours = new ArrayList<Behaviour>();
+	private java.util.List<Rendering> m_entitys = new ArrayList<Rendering>();
 
     public Carte(String path)
     {
@@ -47,16 +49,40 @@ public class Carte implements Rendering
 				for(int x = 0; x < m_largeur;x++)
 				{
 					this.m_spawnCarte[x][y] = this.inputStream.read();
+					createEntity(x,y,this.m_spawnCarte[x][y]);
 				}
 			}
 			this.inputStream.close();
-				
 		} 
 		catch (IOException ex) 
 		{
             ex.printStackTrace();
         }
     }
+
+	private void createEntity(int x,int y,int id)
+	{
+		switch(id)
+		{
+			case Constant.PLAYER_ID:
+				Player p = new Player(new Vector2(x,y));		
+				m_behaviours.add((Behaviour)p);
+				m_entitys.add((Rendering)p);
+				break;
+			case Constant.FANTOME_ID:
+				Ghost g = new Ghost(new Vector2(x,y),Constant.FANTOME_COLOR[fs++%Constant.FANTOME_COLOR.length]);		
+				m_behaviours.add((Behaviour)g);
+				m_entitys.add((Rendering)g);
+				break;
+			default:
+				break;
+		}
+	}
+
+	public java.util.List<Behaviour> getBehaviours()
+	{
+		return this.m_behaviours;
+	}
 
 	public Consumable getConsumableCarte(Vector2 vec)
 	{
@@ -79,11 +105,11 @@ public class Carte implements Rendering
     }
 
 	@Override
-	public void render(Graphics p,JPanel panel)
+	public void render(Graphics p,int width,int height)
 	{		
 		p.setColor(new Color(20,20,220));
-		int sizeXCase = panel.getWidth()/this.m_largeur;
-		int sizeYCase = panel.getHeight()/this.m_hauteur;
+		int sizeXCase = width/this.m_largeur;
+		int sizeYCase = height/this.m_hauteur;
 		for(int y = 0; y < m_hauteur;y++)
 		{
 			for(int x = 0; x < m_largeur;x++)
@@ -93,6 +119,10 @@ public class Carte implements Rendering
 					p.fillRect(x*sizeXCase, y*sizeYCase, sizeXCase, sizeYCase);				 
 				}
 			}
+		}		
+		for(Rendering r : m_entitys)
+		{
+			r.render(p,sizeXCase,sizeYCase);
 		}
 	}
 }

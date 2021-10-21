@@ -30,7 +30,7 @@ public class GameGraphics extends JPanel
         }	
 		for(Rendering r : m_renderings)
 		{
-			r.render(secondPinceau,this); 
+			r.render(secondPinceau,this.getWidth(),this.getHeight()); 
 		}
 	}
 }

@@ -27,10 +27,10 @@ $(BUILD)VUE/Rendering.class: $(SRC)VUE/Rendering.java
 $(BUILD)VUE/InfoGraphics.class: $(SRC)VUE/InfoGraphics.java 
 	$(JC) $(JFLAGS) $(SRC)VUE/InfoGraphics.java
 
-$(BUILD)MODEL/Actor.class: $(SRC)MODEL/Actor.java $(BUILD)MODEL/Entity.class $(BUILD)CONTROLEUR/Behaviour.class $(BUILD)VUE/Rendering.class
+$(BUILD)MODEL/Actor.class: $(SRC)MODEL/Actor.java $(BUILD)MODEL/Entity.class $(BUILD)CONTROLEUR/Behaviour.class $(BUILD)VUE/Rendering.class $(BUILD)MODEL/Direction.class
 	$(JC) $(JFLAGS) $(SRC)MODEL/Actor.java
 
-$(BUILD)MODEL/Carte.class: $(SRC)MODEL/Carte.java $(BUILD)MODEL/Consumable.class $(BUILD)VUE/Rendering.class $(BUILD)MODEL/Constant.class $(BUILD)MODEL/Vector2.class $(BUILD)CONTROLEUR/Behaviour.class
+$(BUILD)MODEL/Carte.class: $(SRC)MODEL/Carte.java $(BUILD)MODEL/Consumable.class $(BUILD)VUE/Rendering.class $(BUILD)MODEL/Constant.class $(BUILD)MODEL/Vector2.class $(BUILD)CONTROLEUR/Behaviour.class $(BUILD)MODEL/Player.class $(BUILD)MODEL/Ghost.class
 	$(JC) $(JFLAGS) $(SRC)MODEL/Carte.java
 
 $(BUILD)MODEL/EffetObject.class: $(SRC)MODEL/EffetObject.java $(BUILD)MODEL/Actor.class
@@ -41,6 +41,9 @@ $(BUILD)MODEL/Entity.class: $(SRC)MODEL/Entity.java $(BUILD)MODEL/Vector2.class
 
 $(BUILD)MODEL/Player.class: $(SRC)MODEL/Player.java $(BUILD)MODEL/Actor.class
 	$(JC) $(JFLAGS) $(SRC)MODEL/Player.java
+
+$(BUILD)MODEL/Ghost.class: $(SRC)MODEL/Ghost.java $(BUILD)MODEL/Actor.class
+	$(JC) $(JFLAGS) $(SRC)MODEL/Ghost.java
 
 $(BUILD)MODEL/Constant.class: $(SRC)MODEL/Constant.java
 	$(JC) $(JFLAGS) $(SRC)MODEL/Constant.java
