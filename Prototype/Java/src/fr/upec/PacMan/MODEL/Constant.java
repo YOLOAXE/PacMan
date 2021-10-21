@@ -20,8 +20,8 @@ public class Constant
 	public static final byte PAC_GOME_VERT_ID = 9;
 
 
-	public static final int HAUTEUR_BASE_FENETRE = 900;
-	public static final int LARGEUR_BASE_FENETRE = 1300;
-	public static final int HAUTEUR_MINIMUM_FENETRE = 740;
-	public static final int LARGEUR_MINIMUM_FENETRE = 1200;
+	public static final int HAUTEUR_BASE_FENETRE = 800;
+	public static final int LARGEUR_BASE_FENETRE = 800;
+	public static final int HAUTEUR_MINIMUM_FENETRE = 400;
+	public static final int LARGEUR_MINIMUM_FENETRE = 400;
 }

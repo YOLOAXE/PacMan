@@ -76,8 +76,20 @@ public class Carte implements Rendering
     }
 
 	@Override
-	public void render(Graphics p)
-	{
-
+	public void render(Graphics p,JPanel panel)
+	{		
+		p.setColor(new Color(20,20,220));
+		int sizeXCase = panel.getWidth()/this.m_largeur;
+		int sizeYCase = panel.getHeight()/this.m_hauteur;
+		for(int y = 0; y < m_hauteur;y++)
+		{
+			for(int x = 0; x < m_largeur;x++)
+			{
+				if(this.m_spawnCarte[x][y] == Constant.WALL_ID)
+				{
+					p.fillRect(x*sizeXCase, y*sizeYCase, sizeXCase, sizeYCase);				 
+				}
+			}
+		}
 	}
 }

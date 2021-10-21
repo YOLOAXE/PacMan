@@ -27,8 +27,8 @@ public abstract class Actor extends Entity implements Behaviour,Rendering
 	}
 
 	@Override
-	public void render(Graphics p)
+	public void render(Graphics p,JPanel panel)
 	{
-
+		
 	}
 }

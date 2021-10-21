@@ -31,7 +31,7 @@ public class Consumable implements Rendering
 	}
 
 	@Override
-	public void render(Graphics p)
+	public void render(Graphics p,JPanel panel)
 	{
 
 	}

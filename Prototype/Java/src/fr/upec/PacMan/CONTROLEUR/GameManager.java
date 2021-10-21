@@ -22,6 +22,7 @@ public class GameManager
 	public GameManager()
 	{
 		this.m_carte = new Carte("Data/1.carte");
+		m_gameGraphics.add(this.m_carte);
 		this.m_window = new Window(m_gameGraphics,m_infoGraphics);
 		this.m_window.setVisible(true);
 		Update();

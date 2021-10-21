@@ -5,5 +5,5 @@ import java.util.*;
 
 public interface Rendering
 {
-    void render(Graphics secondPinceau);    
+    void render(Graphics secondPinceau,JPanel panel); 
 }

@@ -1,4 +1,6 @@
 package fr.upec.PacMan.MODEL;
+import javax.swing.*;
+import java.awt.*;
 
 /*
  * Nom de classe : Vector2
@@ -10,6 +12,7 @@ package fr.upec.PacMan.MODEL;
  {
 	protected byte m_id;
 	protected Vector2 m_pos;
+	protected Color m_color;
 
 	Entity(byte id,Vector2 pos)
 	{

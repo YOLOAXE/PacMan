@@ -11,7 +11,14 @@ import java.util.*;
  */
 
 public class GameGraphics extends JPanel
-{	
+{		
+	private java.util.List<Rendering> m_renderings = new ArrayList<Rendering>();
+
+	public void add(Rendering r)
+	{
+		m_renderings.add(r);
+	}
+
 	@Override
 	protected void paintComponent(Graphics pinceau) 
 	{
@@ -20,7 +27,10 @@ public class GameGraphics extends JPanel
 		{
       		secondPinceau.setColor(Color.black);
       		secondPinceau.fillRect(0, 0, this.getWidth(), this.getHeight());
-        }
-		
+        }	
+		for(Rendering r : m_renderings)
+		{
+			r.render(secondPinceau,this); 
+		}
 	}
 }
