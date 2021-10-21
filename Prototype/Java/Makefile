@@ -15,22 +15,19 @@ default: $(allclass)
 $(BUILD)test/Main.class: $(SRC)test/Main.java $(BUILD)CONTROLEUR/GameManager.class
 	$(JC) $(JFLAGS) $(SRC)test/Main.java
 
-$(BUILD)VUE/Window.class: $(SRC)VUE/Window.java $(BUILD)MODEL/Constant.class $(BUILD)VUE/PanelWindow.class
+$(BUILD)VUE/Window.class: $(SRC)VUE/Window.java $(BUILD)MODEL/Constant.class
 	$(JC) $(JFLAGS) $(SRC)VUE/Window.java
 
-$(BUILD)VUE/GameGraphics.class: $(SRC)VUE/GameGraphics.java $(BUILD)VUE/PanelWindow.class $(BUILD)VUE/Rendering.class
+$(BUILD)VUE/GameGraphics.class: $(SRC)VUE/GameGraphics.java $(BUILD)VUE/Rendering.class
 	$(JC) $(JFLAGS) $(SRC)VUE/GameGraphics.java
 
 $(BUILD)VUE/Rendering.class: $(SRC)VUE/Rendering.java
 	$(JC) $(JFLAGS) $(SRC)VUE/Rendering.java
 
-$(BUILD)VUE/InfoGraphics.class: $(SRC)VUE/InfoGraphics.java $(BUILD)VUE/PanelWindow.class
+$(BUILD)VUE/InfoGraphics.class: $(SRC)VUE/InfoGraphics.java 
 	$(JC) $(JFLAGS) $(SRC)VUE/InfoGraphics.java
 
-$(BUILD)VUE/PanelWindow.class: $(SRC)VUE/PanelWindow.java
-	$(JC) $(JFLAGS) $(SRC)VUE/PanelWindow.java
-
-$(BUILD)MODEL/Actor.class: $(SRC)MODEL/Actor.java $(BUILD)MODEL/Entity.class $(BUILD)CONTROLEUR/Behaviour.class
+$(BUILD)MODEL/Actor.class: $(SRC)MODEL/Actor.java $(BUILD)MODEL/Entity.class $(BUILD)CONTROLEUR/Behaviour.class $(BUILD)VUE/Rendering.class
 	$(JC) $(JFLAGS) $(SRC)MODEL/Actor.java
 
 $(BUILD)MODEL/Carte.class: $(SRC)MODEL/Carte.java $(BUILD)MODEL/Consumable.class $(BUILD)VUE/Rendering.class

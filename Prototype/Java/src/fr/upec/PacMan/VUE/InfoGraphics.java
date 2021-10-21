@@ -9,30 +9,16 @@ import java.util.*;
  * Description   : Cree un JComponent swing pour dessiner les textes/infos
  */
 
-public class InfoGraphics extends JComponent implements PanelWindow
+public class InfoGraphics extends JPanel
 {
-    private JPanel m_infoPanel = new JPanel();
-
-    public InfoGraphics()
-	{
-        m_infoPanel.add(this);
-	}
-
-    @Override
-    public JPanel getPanel()
-    {
-        return m_infoPanel;
-    }
-
 	@Override
 	protected void paintComponent(Graphics pinceau) 
 	{
 		Graphics secondPinceau = pinceau.create();
 		if (this.isOpaque())
 		{
-      		secondPinceau.setColor(new Color(0,0,0));
+      		secondPinceau.setColor(Color.black);
       		secondPinceau.fillRect(0, 0, this.getWidth(), this.getHeight());
         }
-		
 	}
 }
