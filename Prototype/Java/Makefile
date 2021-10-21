@@ -27,10 +27,13 @@ $(BUILD)VUE/Rendering.class: $(SRC)VUE/Rendering.java
 $(BUILD)VUE/InfoGraphics.class: $(SRC)VUE/InfoGraphics.java 
 	$(JC) $(JFLAGS) $(SRC)VUE/InfoGraphics.java
 
-$(BUILD)MODEL/Actor.class: $(SRC)MODEL/Actor.java $(BUILD)MODEL/Entity.class $(BUILD)CONTROLEUR/Behaviour.class $(BUILD)VUE/Rendering.class $(BUILD)MODEL/Direction.class
+$(BUILD)MODEL/CarteCollider.class: $(SRC)MODEL/CarteCollider.java $(BUILD)MODEL/Consumable.class $(BUILD)MODEL/Vector2.class
+	$(JC) $(JFLAGS) $(SRC)MODEL/CarteCollider.java
+
+$(BUILD)MODEL/Actor.class: $(SRC)MODEL/Actor.java $(BUILD)MODEL/Entity.class $(BUILD)CONTROLEUR/Behaviour.class $(BUILD)VUE/Rendering.class $(BUILD)MODEL/Direction.class $(BUILD)MODEL/CarteCollider.class
 	$(JC) $(JFLAGS) $(SRC)MODEL/Actor.java
 
-$(BUILD)MODEL/Carte.class: $(SRC)MODEL/Carte.java $(BUILD)MODEL/Consumable.class $(BUILD)VUE/Rendering.class $(BUILD)MODEL/Constant.class $(BUILD)MODEL/Vector2.class $(BUILD)CONTROLEUR/Behaviour.class $(BUILD)MODEL/Player.class $(BUILD)MODEL/Ghost.class
+$(BUILD)MODEL/Carte.class: $(SRC)MODEL/Carte.java $(BUILD)MODEL/CarteCollider.class $(BUILD)VUE/Rendering.class $(BUILD)MODEL/Constant.class $(BUILD)MODEL/Vector2.class $(BUILD)CONTROLEUR/Behaviour.class $(BUILD)MODEL/Player.class $(BUILD)MODEL/Ghost.class
 	$(JC) $(JFLAGS) $(SRC)MODEL/Carte.java
 
 $(BUILD)MODEL/EffetObject.class: $(SRC)MODEL/EffetObject.java $(BUILD)MODEL/Actor.class

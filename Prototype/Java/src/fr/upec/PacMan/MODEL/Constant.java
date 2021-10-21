@@ -12,7 +12,7 @@ public class Constant
 	public static final byte WALL_ID = 1;
 	public static final byte WALL_SPEC_ID = 2;
 	public static final byte PLAYER_ID = 3;
-	public static final byte FANTOME_ID = 4;
+	public static final byte GHOST_ID = 4;
 	public static final byte GOME_ID = 5;
 	public static final byte PAC_GOME_BLEU_ID = 6;
 	public static final byte PAC_GOME_VIOLET_ID = 7;
@@ -26,5 +26,8 @@ public class Constant
 	public static final int LARGEUR_MINIMUM_FENETRE = 400;
 	public static final float FRAME_PAR_SECONDE = 1/60;
 
-	public static final Color[] FANTOME_COLOR = { Color.red,Color.cyan,Color.orange,Color.pink};
+	public static final int PACMAN_BASE_LIFE = 3;
+	public static final float BASE_SPEED = 0.2f;
+
+	public static final Color[] GHOST_COLOR = { Color.red,Color.cyan,Color.orange,Color.pink};
 }

@@ -56,4 +56,47 @@ public class Vector2
         float dy = y - other.y;
         return (float)Math.sqrt(dx * dx + dy * dy);
 	}
+
+	public Vector2 addition(Vector2 other)
+	{
+		Vector2 result = new Vector2(other.x+x,other.y+y);
+		return result;
+	}
+
+	public Vector2 additionModuloDeuxDirection(Vector2 other,Vector2 modulo)
+	{
+		Vector2 result = new Vector2((other.x+x)%modulo.getIntX(),(other.y+y)%modulo.getIntY());
+		if(result.getIntX() < 0)
+		{
+			result.x = modulo.getIntX() + result.getIntX();
+		}
+		if(result.getIntY() < 0)
+		{
+			result.x = modulo.getIntY() + result.getIntY();
+		}
+		return result;
+	}
+
+	public Vector2 soustraction(Vector2 other)
+	{
+		Vector2 result = new Vector2(x-other.x,y-other.y);
+		return result;
+	}
+
+	public Vector2 multiplication(float f)
+	{
+		Vector2 result = new Vector2(x*f,y*f);
+		return result;
+	}
+
+	public static Vector2 Lerp(Vector2 start, Vector2 end, float percent)
+	{
+		 return end.soustraction(start).multiplication(percent).addition(start);
+	}
+
+	@Override
+	public String toString()
+	{
+		return "(" + x + "," + y + ")";
+	}
 }

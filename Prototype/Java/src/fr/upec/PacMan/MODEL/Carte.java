@@ -15,14 +15,12 @@ import java.io.*;
 
 public class Carte implements Rendering
 {
-    private int m_spawnCarte[][];
-    private Consumable m_consumables[][];	
-    private int m_hauteur;
-    private int m_largeur;
+    private CarteCollider m_carteCollider;	
 	private ClassLoader loader;
 	private final String CHEMIN_SIMPLE_RUN = "./res/";
 	private InputStream inputStream;
 	private int fs = 0;
+	private Player player = null;
 
 	private java.util.List<Behaviour> m_behaviours = new ArrayList<Behaviour>();
 	private java.util.List<Rendering> m_entitys = new ArrayList<Rendering>();
@@ -30,6 +28,10 @@ public class Carte implements Rendering
     public Carte(String path)
     {
 		this.loader = Thread.currentThread().getContextClassLoader();
+		int m_spawnCarte[][];
+		Consumable m_consumables[][];
+		int m_hauteur;
+		int m_largeur;
 		try 
 		{
 			if(this.loader.getResource(path) == null)
@@ -40,19 +42,21 @@ public class Carte implements Rendering
 			{
 				this.inputStream = this.loader.getResourceAsStream(path);
 			}
-			this.m_hauteur = this.inputStream.read();
-			this.m_largeur = this.inputStream.read();
-			this.m_spawnCarte = new int[m_largeur][m_hauteur];
-			this.m_consumables = new Consumable[m_largeur][m_hauteur];
+			m_hauteur = this.inputStream.read();
+			m_largeur = this.inputStream.read();
+			m_spawnCarte = new int[m_largeur][m_hauteur];
+			m_consumables = new Consumable[m_largeur][m_hauteur];
+			m_carteCollider = new CarteCollider(m_hauteur,m_largeur,m_spawnCarte,m_consumables);
 			for(int y = 0; y < m_hauteur;y++)
 			{
 				for(int x = 0; x < m_largeur;x++)
 				{
-					this.m_spawnCarte[x][y] = this.inputStream.read();
-					createEntity(x,y,this.m_spawnCarte[x][y]);
+					m_spawnCarte[x][y] = this.inputStream.read();
+					m_carteCollider.setSpawnCarte(new Vector2(x,y),m_spawnCarte[x][y]);
+					createEntity(x,y,m_spawnCarte[x][y]);
 				}
 			}
-			this.inputStream.close();
+			this.inputStream.close();			
 		} 
 		catch (IOException ex) 
 		{
@@ -65,12 +69,12 @@ public class Carte implements Rendering
 		switch(id)
 		{
 			case Constant.PLAYER_ID:
-				Player p = new Player(new Vector2(x,y));		
-				m_behaviours.add((Behaviour)p);
-				m_entitys.add((Rendering)p);
+				player = new Player(new Vector2(x,y),m_carteCollider);		
+				m_behaviours.add((Behaviour)player);
+				m_entitys.add((Rendering)player);
 				break;
-			case Constant.FANTOME_ID:
-				Ghost g = new Ghost(new Vector2(x,y),Constant.FANTOME_COLOR[fs++%Constant.FANTOME_COLOR.length]);		
+			case Constant.GHOST_ID:
+				Ghost g = new Ghost(new Vector2(x,y),Constant.GHOST_COLOR[fs++%Constant.GHOST_COLOR.length],m_carteCollider);
 				m_behaviours.add((Behaviour)g);
 				m_entitys.add((Rendering)g);
 				break;
@@ -84,37 +88,22 @@ public class Carte implements Rendering
 		return this.m_behaviours;
 	}
 
-	public Consumable getConsumableCarte(Vector2 vec)
+	public Player getPlayer()
 	{
-		return this.m_consumables[vec.getIntX()][vec.getIntY()];
+		return player;
 	}
-
-    public int getSpawnCarte(Vector2 vec)
-    {
-        return this.m_spawnCarte[vec.getIntX()][vec.getIntY()];
-    }
-
-    public int getH()
-    {
-        return this.m_hauteur;
-    }
-
-    public int getL()
-    {
-        return this.m_largeur;
-    }
 
 	@Override
 	public void render(Graphics p,int width,int height)
 	{		
 		p.setColor(new Color(20,20,220));
-		int sizeXCase = width/this.m_largeur;
-		int sizeYCase = height/this.m_hauteur;
-		for(int y = 0; y < m_hauteur;y++)
+		int sizeXCase = width/this.m_carteCollider.getL();
+		int sizeYCase = height/this.m_carteCollider.getH();
+		for(int y = 0; y < this.m_carteCollider.getH();y++)
 		{
-			for(int x = 0; x < m_largeur;x++)
+			for(int x = 0; x < this.m_carteCollider.getL();x++)
 			{
-				if(this.m_spawnCarte[x][y] == Constant.WALL_ID)
+				if(this.m_carteCollider.getSpawnCarte(new Vector2(x,y)) == Constant.WALL_ID)
 				{
 					p.fillRect(x*sizeXCase, y*sizeYCase, sizeXCase, sizeYCase);				 
 				}
