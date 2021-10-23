@@ -24,7 +24,7 @@ $(BUILD)VUE/GameGraphics.class: $(SRC)VUE/GameGraphics.java $(BUILD)VUE/Renderin
 $(BUILD)VUE/Rendering.class: $(SRC)VUE/Rendering.java
 	$(JC) $(JFLAGS) $(SRC)VUE/Rendering.java
 
-$(BUILD)VUE/InfoGraphics.class: $(SRC)VUE/InfoGraphics.java 
+$(BUILD)VUE/InfoGraphics.class: $(SRC)VUE/InfoGraphics.java $(BUILD)MODEL/Constant.class
 	$(JC) $(JFLAGS) $(SRC)VUE/InfoGraphics.java
 
 $(BUILD)MODEL/CarteCollider.class: $(SRC)MODEL/CarteCollider.java $(SRC)MODEL/Consumable.java $(BUILD)MODEL/Vector2.class $(BUILD)MODEL/Entity.class $(BUILD)VUE/Rendering.class
@@ -36,7 +36,7 @@ $(BUILD)MODEL/Node.class: $(SRC)MODEL/Node.java $(BUILD)MODEL/Vector2.class
 $(BUILD)MODEL/Actor.class: $(SRC)MODEL/Actor.java $(BUILD)MODEL/Entity.class $(BUILD)CONTROLEUR/Behaviour.class $(BUILD)VUE/Rendering.class $(BUILD)MODEL/Direction.class $(BUILD)MODEL/CarteCollider.class
 	$(JC) $(JFLAGS) $(SRC)MODEL/Actor.java
 
-$(BUILD)MODEL/Carte.class: $(SRC)MODEL/Carte.java $(BUILD)MODEL/CarteCollider.class $(BUILD)VUE/Rendering.class $(BUILD)MODEL/Constant.class $(BUILD)MODEL/Vector2.class $(BUILD)CONTROLEUR/Behaviour.class $(BUILD)MODEL/Player.class $(BUILD)MODEL/Ghost.class $(BUILD)MODEL/Gum.class
+$(BUILD)MODEL/Carte.class: $(SRC)MODEL/Carte.java $(BUILD)MODEL/CarteCollider.class $(BUILD)VUE/Rendering.class $(BUILD)MODEL/Constant.class $(BUILD)MODEL/Vector2.class $(BUILD)CONTROLEUR/Behaviour.class $(BUILD)MODEL/Player.class $(BUILD)MODEL/Ghost.class $(BUILD)MODEL/Gum.class $(BUILD)VUE/InfoGraphics.class
 	$(JC) $(JFLAGS) $(SRC)MODEL/Carte.java
 
 $(BUILD)MODEL/EffetObject.class: $(SRC)MODEL/EffetObject.java $(BUILD)MODEL/Actor.class
@@ -45,7 +45,7 @@ $(BUILD)MODEL/EffetObject.class: $(SRC)MODEL/EffetObject.java $(BUILD)MODEL/Acto
 $(BUILD)MODEL/Entity.class: $(SRC)MODEL/Entity.java $(BUILD)MODEL/Vector2.class
 	$(JC) $(JFLAGS) $(SRC)MODEL/Entity.java
 
-$(BUILD)MODEL/Player.class: $(SRC)MODEL/Player.java $(BUILD)MODEL/Actor.class
+$(BUILD)MODEL/Player.class: $(SRC)MODEL/Player.java $(BUILD)MODEL/Actor.class $(BUILD)VUE/InfoGraphics.class
 	$(JC) $(JFLAGS) $(SRC)MODEL/Player.java
 
 $(BUILD)MODEL/Gum.class: $(SRC)MODEL/Gum.java $(BUILD)MODEL/Consumable.class

@@ -29,6 +29,7 @@ public class Constant
 	public static final int PACMAN_BASE_LIFE = 3;
 	public static final float BASE_SPEED = 0.2f;
 	
+	public static final Color PACMAN_COLOR = new Color(255,255,0);
 	public static final Color[] GHOST_COLOR = { Color.red,Color.cyan,Color.orange,Color.pink};
 	public static final Direction[] allDirection = {Direction.NORTH,Direction.SOUTH,Direction.WEST,Direction.EAST};
 }

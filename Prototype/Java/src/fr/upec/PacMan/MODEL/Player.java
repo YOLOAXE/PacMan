@@ -1,4 +1,5 @@
 package fr.upec.PacMan.MODEL;
+import fr.upec.PacMan.VUE.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -13,11 +14,14 @@ import java.awt.event.KeyListener;
 public class Player extends Actor implements KeyListener
 {
 	private int vie = Constant.PACMAN_BASE_LIFE;
+	private int score = 0;
+	private InfoGraphics infoGraphics = null;
 
-	public Player(Vector2 pos,CarteCollider carteCollider)
+	public Player(Vector2 pos,CarteCollider carteCollider,InfoGraphics ig)
 	{
 		super(Constant.PLAYER_ID,pos,new Color(255,255,0),carteCollider);	
 		super.m_idWallCollide.add((int)Constant.WALL_SPEC_ID);
+		this.infoGraphics = ig;
 	}
 
 	@Override

@@ -1,7 +1,7 @@
 package fr.upec.PacMan.MODEL;
 import java.util.*;
 
-import fr.upec.PacMan.VUE.Rendering;
+import fr.upec.PacMan.VUE.*;
 import fr.upec.PacMan.CONTROLEUR.Behaviour;
 import javax.swing.*;
 import java.awt.*;
@@ -21,13 +21,14 @@ public class Carte implements Rendering
 	private InputStream inputStream;
 	private int fs = 0;
 	private Player player = null;
-
+	private InfoGraphics m_infoGraphics = null;
 	private java.util.List<Behaviour> m_behaviours = new ArrayList<Behaviour>();
 	private java.util.List<Rendering> m_entitys = new ArrayList<Rendering>();
 
-    public Carte(String path)
+    public Carte(String path,InfoGraphics ig)
     {
 		this.loader = Thread.currentThread().getContextClassLoader();
+		this.m_infoGraphics = ig;
 		int m_spawnCarte[][];
 		Consumable m_consumables[][];
 		int m_hauteur;
@@ -69,7 +70,7 @@ public class Carte implements Rendering
 		switch(id)
 		{
 			case Constant.PLAYER_ID:
-				player = new Player(new Vector2(x,y),m_carteCollider);		
+				player = new Player(new Vector2(x,y),m_carteCollider,this.m_infoGraphics);		
 				m_behaviours.add((Behaviour)player);
 				m_entitys.add((Rendering)player);
 				break;
