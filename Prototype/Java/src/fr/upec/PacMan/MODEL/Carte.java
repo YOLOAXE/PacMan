@@ -57,6 +57,7 @@ public class Carte implements Rendering
 				{
 					m_spawnCarte[x][y] = this.inputStream.read();
 					m_carteCollider.setSpawnCarte(new Vector2(x,y),m_spawnCarte[x][y]);
+					m_carteCollider.setConsumableCarte(new Vector2(x, y), m_spawnCarte[x][y]);
 					createEntity(x,y,m_spawnCarte[x][y]);
 				}
 			}
@@ -94,6 +95,18 @@ public class Carte implements Rendering
 				Gum gum = new Gum(new Vector2(x, y), m_carteCollider);
 				m_renderings.add((Rendering)gum);
 				m_entitys.add((Entity)gum);
+			case Constant.PAC_GOME_ORANGE_ID:
+				OrangeGum ogum = new OrangeGum(new Vector2(x, y), m_carteCollider);
+				m_renderings.add((Rendering)ogum);
+				m_entitys.add((Entity)ogum);
+			case Constant.PAC_GOME_VERT_ID:
+				GreenGum ggum = new GreenGum(new Vector2(x, y), m_carteCollider);
+				m_renderings.add((Rendering)ggum);
+				m_entitys.add((Entity)ggum);
+			case Constant.PAC_GOME_VIOLET_ID:
+				VioletGum vgum = new VioletGum(new Vector2(x, y), m_carteCollider);
+				m_renderings.add((Rendering)vgum);
+				m_entitys.add((Entity)vgum);
 			default:
 				break;
 		}

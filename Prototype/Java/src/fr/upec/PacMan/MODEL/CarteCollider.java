@@ -17,7 +17,7 @@ public class CarteCollider
     private int m_hauteur;
     private int m_largeur;
 	private int m_spawnCarte[][];
-    private Consumable m_consumables[][];	
+    private Consumable m_consumables[][], cons;	
 
 	public CarteCollider(int hauteur,int largeur,int spawnCarte[][],Consumable consumables[][])
 	{
@@ -27,9 +27,25 @@ public class CarteCollider
 		m_consumables = consumables;
 	}
 
-	public void setConsumableCarte(Vector2 vec,Consumable c)
+	public void setConsumableCarte(Vector2 vec,int c)
 	{
-		this.m_consumables[vec.getIntX()][vec.getIntY()] = c;
+		switch (c) {
+		case Constant.GOME_ID:
+			cons = new Gum(vec, this);
+			break;
+		case Constant.PAC_GOME_ORANGE_ID:
+			cons = new OrangeGum(vec, this);
+			break;
+		case Constant.PAC_GOME_VERT_ID:
+			cons = new GreenGum(vec, this);
+			break;
+		case Constant.PAC_GOME_VIOLET_ID:
+			cons = new VioletGum(vec, this);
+			break;
+		default:
+			break;
+		}
+		this.m_consumables[vec.getIntX()][vec.getIntY()] = cons;
 	}
 
 	public void setSpawnCarte(Vector2 vec,int id)

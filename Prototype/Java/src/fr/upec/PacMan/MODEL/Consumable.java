@@ -14,6 +14,7 @@ import java.util.*;
 public class Consumable extends Entity implements Rendering
 {
 	protected int m_consomeScore;
+	protected boolean m_isEaten = false;
 	protected Vector2 m_currentPos = new Vector2();
 	protected CarteCollider m_carteCollider;
 
@@ -49,7 +50,9 @@ public class Consumable extends Entity implements Rendering
 	@Override
 	public void render(Graphics p,int width,int height)
 	{
-		p.setColor(super.m_color);
-		p.fillOval((int)(super.m_pos.x*width+width/4), (int)(super.m_pos.y*height+height/4), width/2, height/2);
+		if(!m_isEaten) {
+			p.setColor(super.m_color);
+			p.fillOval((int)(super.m_pos.x*width+width/4), (int)(super.m_pos.y*height+height/4), width/2, height/2);
+		}
 	}
 }

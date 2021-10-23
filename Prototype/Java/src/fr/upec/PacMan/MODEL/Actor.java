@@ -47,6 +47,12 @@ public abstract class Actor extends Entity implements Behaviour,Rendering
 		m_timerDeplacement = 0.0f;	
 		Vector2 result = m_currentPos.additionModuloDeuxDirection(dir.getPosDirection(),this.m_carteCollider.getSize());
 		this.wraparound = !result.equalsInt(m_currentPos.addition(dir.getPosDirection()));
+		
+		if(super.m_id == Constant.PLAYER_ID) {
+			Consumable cons = m_carteCollider.getConsumableCarte(m_currentPos);
+			cons.m_isEaten = true;
+		}
+		
 		boolean collide = false;
 		for (int i = 0; i < m_idWallCollide.size() && !collide; i++)
 		{
