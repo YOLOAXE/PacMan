@@ -25,6 +25,7 @@ public class Carte implements Rendering
 	private java.util.List<Behaviour> m_behaviours = new ArrayList<Behaviour>();
 	private java.util.List<Rendering> m_entitys = new ArrayList<Rendering>();
 	private java.util.List<Vector2> m_ghostPos = new ArrayList<Vector2>();
+	private java.util.List<Actor> m_actor = new ArrayList<Actor>();
 
     public Carte(String path,InfoGraphics ig)
     {
@@ -60,9 +61,9 @@ public class Carte implements Rendering
 			}
 			for(Vector2 vec : m_ghostPos)
 			{
-				Ghost g = new Ghost(vec,Constant.GHOST_COLOR[fs++%Constant.GHOST_COLOR.length],m_carteCollider);
-				g.setTarget(player);
+				Ghost g = new Ghost(vec,Constant.GHOST_COLOR[fs++%Constant.GHOST_COLOR.length],m_carteCollider,player);				
 				m_behaviours.add((Behaviour)g);
+				m_actor.add((Actor)g);
 				m_entitys.add((Rendering)g);
 			}
 			this.inputStream.close();			
@@ -81,6 +82,7 @@ public class Carte implements Rendering
 				player = new Player(new Vector2(x,y),m_carteCollider,this.m_infoGraphics);		
 				m_behaviours.add((Behaviour)player);
 				m_entitys.add((Rendering)player);
+				m_actor.add((Actor)player);
 				break;
 			case Constant.GHOST_ID:
 					m_ghostPos.add(new Vector2(x,y));
@@ -96,6 +98,11 @@ public class Carte implements Rendering
 	public java.util.List<Behaviour> getBehaviours()
 	{
 		return this.m_behaviours;
+	}
+
+	public java.util.List<Actor> getActors()
+	{
+		return this.m_actor;
 	}
 
 	public Player getPlayer()

@@ -14,10 +14,9 @@ public class Constant
 	public static final byte PLAYER_ID = 3;
 	public static final byte GHOST_ID = 4;
 	public static final byte GOME_ID = 5;
-	public static final byte PAC_GOME_BLEU_ID = 6;
+	public static final byte PAC_GOME_VERT_ID = 6;
 	public static final byte PAC_GOME_VIOLET_ID = 7;
 	public static final byte PAC_GOME_ORANGE_ID = 8;
-	public static final byte PAC_GOME_VERT_ID = 9;
 
 
 	public static final int HAUTEUR_BASE_FENETRE = 800;

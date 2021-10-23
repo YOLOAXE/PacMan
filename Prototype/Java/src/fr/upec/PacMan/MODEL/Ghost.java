@@ -16,14 +16,10 @@ public class Ghost extends Actor
 	private java.util.List<Vector2> allCorrectNoWallPos = new ArrayList<Vector2>();
 	private Player m_player = null;
 
-	public void setTarget(Player p)
-	{
-		this.m_player = p;
-	}
-
-	public Ghost(Vector2 pos,Color c,CarteCollider carteCollider)
+	public Ghost(Vector2 pos,Color c,CarteCollider carteCollider,Player p)
 	{
 		super(Constant.GHOST_ID,pos,c,carteCollider);	
+		this.m_player = p;
 		m_pathCarte = new Node[carteCollider.getL()][carteCollider.getH()];
 		for (int i = 0; i < carteCollider.getL(); i++)
 		{
@@ -139,6 +135,12 @@ public class Ghost extends Actor
 	public void update(float deltaTime)
 	{
 		super.update(deltaTime);
+
+		if(m_player.getPosition().equalsInt(super.m_pos))
+		{
+			m_player.died();
+		}
+
 		// PATH finding RANDOM
 		if (m_indicePathDir == m_pathDir.size() || !m_move)
 		{			

@@ -15,6 +15,7 @@ public abstract class Actor extends Entity implements Behaviour,Rendering
 	protected float m_actorSpeed = Constant.BASE_SPEED;
 	protected Direction m_dir = Direction.NORTH;
 	protected Direction m_nextDir = Direction.NORTH;
+	protected Vector2 m_spawnPoint = new Vector2();
 	protected Vector2 m_currentPos = new Vector2();
 	protected Vector2 m_nextPos = new Vector2();
 	protected boolean m_move = false;
@@ -27,11 +28,18 @@ public abstract class Actor extends Entity implements Behaviour,Rendering
 	Actor(byte id,Vector2 pos,Color color,CarteCollider carteCollider)
 	{
 		super(id,pos);
+		m_spawnPoint = pos;
 		super.m_color = color;
 		this.m_carteCollider = carteCollider;
 		m_idWallCollide.add((int)Constant.WALL_ID);
 		m_currentPos = pos;
 		m_nextPos = pos;
+	}
+
+	public void resetSpawnPoint()
+	{
+		m_currentPos = m_spawnPoint;
+		m_nextPos = m_spawnPoint;
 	}
 
 	Vector2 move(Direction dir)

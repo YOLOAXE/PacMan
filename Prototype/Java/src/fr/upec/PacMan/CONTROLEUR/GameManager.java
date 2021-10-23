@@ -11,7 +11,7 @@ import java.awt.event.KeyListener;
  * Description   : Cree et suprime tous les elements liers au jeux et si besoin redemare la partie en cas de fin de jeux
  */
 
-public class GameManager
+public class GameManager implements Behaviour
 {
 	private List<Behaviour> m_behaviours;
 	private long m_lastTime = System.nanoTime();
@@ -33,6 +33,7 @@ public class GameManager
 		this.m_behaviours = new ArrayList<Behaviour>(this.m_carte.getBehaviours());
 		this.m_window.setVisible(true);
 		this.m_window.addKeyListener(this.m_carte.getPlayer());
+		m_behaviours.add(this);
 	}
 
 	public void start()
@@ -59,6 +60,18 @@ public class GameManager
 				m_gameGraphics.repaint();
 				m_lag -= Constant.FRAME_PAR_SECONDE;
 			}			
+		}
+	}
+
+	@Override
+	public void update(float deltaTime)//Game maanager
+	{
+		if(this.m_carte.getPlayer().isDead())
+		{
+			for(Actor a : this.m_carte.getActors())
+			{
+				a.resetSpawnPoint();
+			}
 		}
 	}
 }

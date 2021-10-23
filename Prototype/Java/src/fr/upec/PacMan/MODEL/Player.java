@@ -13,9 +13,10 @@ import java.awt.event.KeyListener;
 
 public class Player extends Actor implements KeyListener
 {
-	private int vie = Constant.PACMAN_BASE_LIFE;
-	private int score = 0;
+	private int m_vie = Constant.PACMAN_BASE_LIFE;
+	private int m_score = 0;
 	private InfoGraphics infoGraphics = null;
+	private boolean m_dead = false;
 
 	public Player(Vector2 pos,CarteCollider carteCollider,InfoGraphics ig)
 	{
@@ -31,6 +32,32 @@ public class Player extends Actor implements KeyListener
 		if(m_timerDeplacement > m_actorSpeed/2.0f && !m_nextState && m_move)
 		{
 			m_nextState = true;
+		}
+	}
+
+	@Override
+	public void resetSpawnPoint()
+	{
+		super.resetSpawnPoint();
+		m_dead = false;
+	}
+
+	public boolean isDead()
+	{
+		return m_dead;
+	}
+
+	public void died()
+	{		
+		if(!m_dead)
+		{
+			m_dead = true;
+			System.out.println("Player Dead");
+			if(m_vie > 0)
+			{
+				m_vie--;
+			}
+			infoGraphics.setVie(m_vie);
 		}
 	}
 
