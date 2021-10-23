@@ -8,7 +8,7 @@ import java.awt.*;
  * Description   : Pour manipuler les objects en Jeux
  */
 
- public class Entity
+ public abstract class Entity
  {
 	protected byte m_id;
 	protected Vector2 m_pos;
@@ -24,4 +24,6 @@ import java.awt.*;
 	{
 		return m_pos;
 	}
+
+	public abstract void reset();
  }

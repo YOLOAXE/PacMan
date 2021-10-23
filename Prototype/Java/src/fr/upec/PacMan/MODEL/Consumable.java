@@ -35,6 +35,12 @@ public class Consumable extends Entity implements Rendering
 		m_consomeScore = score;
 	}
 
+	@Override
+	public void reset()
+	{
+		
+	}
+
 	int getScore()
 	{
 		return m_consomeScore;

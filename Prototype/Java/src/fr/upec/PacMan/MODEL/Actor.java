@@ -70,6 +70,12 @@ public abstract class Actor extends Entity implements Behaviour,Rendering
 	}
 
 	@Override
+	public void reset()
+	{
+		this.resetSpawnPoint();
+	}
+
+	@Override
 	public void update(float deltaTime)
 	{
 		m_timerDeplacement += deltaTime;

@@ -24,6 +24,8 @@ public class GameManager implements Behaviour
 	private Carte m_carte;
 	private GameGraphics m_gameGraphics = new GameGraphics(); 
 	private InfoGraphics m_infoGraphics = new InfoGraphics(); 
+	private boolean m_endGame = false;
+	private float m_timerRestart;
 
 	public GameManager()
 	{
@@ -33,7 +35,7 @@ public class GameManager implements Behaviour
 		this.m_behaviours = new ArrayList<Behaviour>(this.m_carte.getBehaviours());
 		this.m_window.setVisible(true);
 		this.m_window.addKeyListener(this.m_carte.getPlayer());
-		m_behaviours.add(this);
+		this.m_behaviours.add(this);
 	}
 
 	public void start()
@@ -66,15 +68,31 @@ public class GameManager implements Behaviour
 	@Override
 	public void update(float deltaTime)//Game management
 	{
-		if(this.m_carte.getPlayer().isDead())
+		if(this.m_carte.getPlayer().isDead() && !m_endGame)
 		{
 			if(this.m_carte.getPlayer().endGame())
 			{
-				this.m_gameGraphics.endGame();
+				this.m_gameGraphics.endGame(false);//TODO Player Win
+				this.m_endGame = true;
+				this.m_timerRestart = 5.0f;
 			}
 			for(Actor a : this.m_carte.getActors())
 			{
 				a.resetSpawnPoint();
+			}
+		}
+		if(m_endGame)
+		{
+			this.m_timerRestart -= deltaTime;
+			this.m_gameGraphics.setTime(Math.round(this.m_timerRestart));
+			if(this.m_timerRestart < 0.0f)
+			{
+				this.m_endGame = false;				
+				for(Entity e : this.m_carte.getEntitys())
+				{
+					e.reset();
+				}
+				this.m_gameGraphics.reset();
 			}
 		}
 	}

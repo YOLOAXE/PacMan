@@ -13,7 +13,7 @@ import java.awt.event.KeyListener;
 
 public class Player extends Actor implements KeyListener
 {
-	private int m_vie = Constant.PACMAN_BASE_LIFE;
+	private int m_life = Constant.PACMAN_BASE_LIFE;
 	private int m_score = 0;
 	private InfoGraphics infoGraphics = null;
 	private boolean m_dead = false;
@@ -36,6 +36,15 @@ public class Player extends Actor implements KeyListener
 	}
 
 	@Override
+	public void reset()
+	{
+		super.reset();
+		m_score = 0;
+		m_life = Constant.PACMAN_BASE_LIFE;
+		infoGraphics.setVie(m_life);		
+	}
+
+	@Override
 	public void resetSpawnPoint()
 	{
 		super.resetSpawnPoint();
@@ -44,7 +53,7 @@ public class Player extends Actor implements KeyListener
 
 	public boolean endGame()
 	{
-		return m_dead && m_vie == 0; 
+		return m_dead && m_life == 0; 
 	}
 
 	public boolean isDead()
@@ -57,11 +66,11 @@ public class Player extends Actor implements KeyListener
 		if(!m_dead)
 		{
 			m_dead = true;
-			if(m_vie > 0)
+			if(m_life > 0)
 			{
-				m_vie--;
+				m_life--;
 			}
-			infoGraphics.setVie(m_vie);
+			infoGraphics.setVie(m_life);
 		}
 	}
 

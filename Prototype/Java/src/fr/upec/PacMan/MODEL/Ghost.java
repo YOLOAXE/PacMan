@@ -164,6 +164,15 @@ public class Ghost extends Actor
 		// RANDOM Simple
 	}
 
+	@Override
+	public void reset()
+	{
+		super.reset();
+		m_indicePathDir = 0;
+		m_pathDir.clear();
+		m_pathDir.add(Direction.NORTH);
+	}
+
 	public int RandomRange(int min, int max) {		
 		return random.nextInt(max - min) + min;
 	}

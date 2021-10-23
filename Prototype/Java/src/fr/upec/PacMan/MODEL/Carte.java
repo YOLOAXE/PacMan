@@ -23,7 +23,8 @@ public class Carte implements Rendering
 	private Player player = null;	
 	private InfoGraphics m_infoGraphics = null;
 	private java.util.List<Behaviour> m_behaviours = new ArrayList<Behaviour>();
-	private java.util.List<Rendering> m_entitys = new ArrayList<Rendering>();
+	private java.util.List<Rendering> m_renderings = new ArrayList<Rendering>();
+	private java.util.List<Entity> m_entitys = new ArrayList<Entity>();
 	private java.util.List<Vector2> m_ghostPos = new ArrayList<Vector2>();
 	private java.util.List<Actor> m_actor = new ArrayList<Actor>();
 
@@ -64,7 +65,8 @@ public class Carte implements Rendering
 				Ghost g = new Ghost(vec,Constant.GHOST_COLOR[fs++%Constant.GHOST_COLOR.length],m_carteCollider,player);				
 				m_behaviours.add((Behaviour)g);
 				m_actor.add((Actor)g);
-				m_entitys.add((Rendering)g);
+				m_entitys.add((Entity)g);
+				m_renderings.add((Rendering)g);
 			}
 			this.inputStream.close();			
 		} 
@@ -81,7 +83,8 @@ public class Carte implements Rendering
 			case Constant.PLAYER_ID:
 				player = new Player(new Vector2(x,y),m_carteCollider,this.m_infoGraphics);		
 				m_behaviours.add((Behaviour)player);
-				m_entitys.add((Rendering)player);
+				m_renderings.add((Rendering)player);
+				m_entitys.add((Entity)player);
 				m_actor.add((Actor)player);
 				break;
 			case Constant.GHOST_ID:
@@ -89,7 +92,8 @@ public class Carte implements Rendering
 				break;
 			case Constant.GOME_ID:
 				Gum gum = new Gum(new Vector2(x, y), m_carteCollider);
-				m_entitys.add((Rendering)gum);
+				m_renderings.add((Rendering)gum);
+				m_entitys.add((Entity)gum);
 			default:
 				break;
 		}
@@ -98,6 +102,11 @@ public class Carte implements Rendering
 	public java.util.List<Behaviour> getBehaviours()
 	{
 		return this.m_behaviours;
+	}
+
+	public java.util.List<Entity> getEntitys()
+	{
+		return this.m_entitys;
 	}
 
 	public java.util.List<Actor> getActors()
@@ -126,7 +135,7 @@ public class Carte implements Rendering
 				}
 			}
 		}		
-		for(Rendering r : m_entitys)
+		for(Rendering r : m_renderings)
 		{
 			r.render(p,sizeXCase,sizeYCase);
 		}
