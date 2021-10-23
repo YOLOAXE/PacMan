@@ -44,8 +44,8 @@ public abstract class Actor extends Entity implements Behaviour,Rendering
 
 	Vector2 move(Direction dir)
 	{
-		m_timerDeplacement = 0.0f;		
-		Vector2 result = m_currentPos.additionModuloDeuxDirection(dir.getPosDirection(),this.m_carteCollider.getSize());	
+		m_timerDeplacement = 0.0f;	
+		Vector2 result = m_currentPos.additionModuloDeuxDirection(dir.getPosDirection(),this.m_carteCollider.getSize());
 		this.wraparound = !result.equalsInt(m_currentPos.addition(dir.getPosDirection()));
 		boolean collide = false;
 		for (int i = 0; i < m_idWallCollide.size() && !collide; i++)

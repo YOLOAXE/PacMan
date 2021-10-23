@@ -72,7 +72,7 @@ public class Vector2
 		}
 		if(result.getIntY() < 0)
 		{
-			result.x = modulo.getIntY() + result.getIntY();
+			result.y = modulo.getIntY() + result.getIntY();
 		}
 		return result;
 	}
