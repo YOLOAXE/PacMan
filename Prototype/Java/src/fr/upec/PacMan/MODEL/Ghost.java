@@ -21,38 +21,41 @@ public class Ghost extends Actor
 		super(Constant.GHOST_ID,pos,c,carteCollider);	
 		this.m_player = p;
 		m_pathCarte = new Node[carteCollider.getL()][carteCollider.getH()];
-		for (int i = 0; i < carteCollider.getL(); i++)
-		{
-			for (int j = 0; j < carteCollider.getH(); j++)
-			{
-				m_pathCarte[i][j] = new Node(new Vector2(i, j),carteCollider.getSpawnCarte(new Vector2(i,j)) == Constant.WALL_ID);
-				//TODO MODULO DEUX DIR 				
-				if (i - 1 >= 0)
-				{
-					if (!m_pathCarte[i - 1][j].isWall())
-					{
-						m_pathCarte[i][j].addNeighbourDirection(m_pathCarte[i - 1][j],Direction.EAST);					
-					}
-					if (!m_pathCarte[i][j].isWall())
-					{
-						m_pathCarte[i - 1][j].addNeighbourDirection(m_pathCarte[i][j],Direction.WEST);
-					}
+		for (int i = 0; i < carteCollider.getL(); i++){
+			for (int j = 0; j < carteCollider.getH(); j++){
+				m_pathCarte[i][j] = new Node(new Vector2(i, j),carteCollider.getSpawnCarte(new Vector2(i,j)) == Constant.WALL_ID);		
+			}
+		}
+		for (int i = 0; i < carteCollider.getL(); i++){
+			for (int j = 0; j < carteCollider.getH(); j++){
+				int newI = modDeuxDir(i-1,carteCollider.getL());
+				int newJ = modDeuxDir(j-1,carteCollider.getH());
+				if (!m_pathCarte[newI][j].isWall()){
+					m_pathCarte[i][j].addNeighbourDirection(m_pathCarte[newI][j],Direction.EAST);					
 				}
-				if (j - 1 >= 0)
-				{
-					if (!m_pathCarte[i][j - 1].isWall())
-					{
-						m_pathCarte[i][j].addNeighbourDirection(m_pathCarte[i][j - 1],Direction.SOUTH);						
-					}
-					if (!m_pathCarte[i][j].isWall())
-					{
-						m_pathCarte[i][j - 1].addNeighbourDirection(m_pathCarte[i][j],Direction.NORTH);	
-						allCorrectNoWallPos.add(new Vector2(i,j));
-					}
+				if (!m_pathCarte[i][j].isWall()){
+					m_pathCarte[newI][j].addNeighbourDirection(m_pathCarte[i][j],Direction.WEST);
+				}				
+				if (!m_pathCarte[i][newJ].isWall()){
+					m_pathCarte[i][j].addNeighbourDirection(m_pathCarte[i][newJ],Direction.SOUTH);						
+				}
+				if (!m_pathCarte[i][j].isWall()){
+					m_pathCarte[i][newJ].addNeighbourDirection(m_pathCarte[i][j],Direction.NORTH);	
+					allCorrectNoWallPos.add(new Vector2(i,j));
 				}
 			}
 		}
 		m_pathDir.add(Direction.NORTH);
+	}
+
+	public int modDeuxDir(int i,int m)
+	{
+		int res = i%m;
+		if(res < 0)
+		{
+			res += m;
+		}
+		return res;
 	}
 
 	Node findlowestFCost(java.util.List<Node> nodes)
