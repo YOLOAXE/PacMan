@@ -64,10 +64,14 @@ public class GameManager implements Behaviour
 	}
 
 	@Override
-	public void update(float deltaTime)//Game maanager
+	public void update(float deltaTime)//Game management
 	{
 		if(this.m_carte.getPlayer().isDead())
 		{
+			if(this.m_carte.getPlayer().endGame())
+			{
+				this.m_gameGraphics.endGame();
+			}
 			for(Actor a : this.m_carte.getActors())
 			{
 				a.resetSpawnPoint();

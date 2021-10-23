@@ -13,10 +13,16 @@ import java.util.*;
 public class GameGraphics extends JPanel
 {		
 	private java.util.List<Rendering> m_renderings = new ArrayList<Rendering>();
+	private boolean m_endGame = false;
 
 	public void add(Rendering r)
 	{
 		m_renderings.add(r);
+	}
+
+	public void endGame()
+	{
+		m_endGame = true;		
 	}
 
 	@Override
@@ -27,10 +33,19 @@ public class GameGraphics extends JPanel
 		{
       		secondPinceau.setColor(Color.black);
       		secondPinceau.fillRect(0, 0, this.getWidth(), this.getHeight());
-        }	
-		for(Rendering r : m_renderings)
+        }			
+		if(m_endGame)
 		{
-			r.render(secondPinceau,this.getWidth(),this.getHeight()); 
+			secondPinceau.setColor(Color.red);	
+			secondPinceau.setFont(new Font("serif", Font.BOLD, 60));
+			secondPinceau.drawString("GameOver", (this.getWidth()/2)-(this.getWidth()/4), this.getHeight()/2);
+		}
+		else
+		{
+			for(Rendering r : m_renderings)
+			{
+				r.render(secondPinceau,this.getWidth(),this.getHeight()); 
+			}
 		}
 	}
 }

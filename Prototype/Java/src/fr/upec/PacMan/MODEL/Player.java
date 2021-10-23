@@ -42,6 +42,11 @@ public class Player extends Actor implements KeyListener
 		m_dead = false;
 	}
 
+	public boolean endGame()
+	{
+		return m_dead && m_vie == 0; 
+	}
+
 	public boolean isDead()
 	{
 		return m_dead;
@@ -52,7 +57,6 @@ public class Player extends Actor implements KeyListener
 		if(!m_dead)
 		{
 			m_dead = true;
-			System.out.println("Player Dead");
 			if(m_vie > 0)
 			{
 				m_vie--;
