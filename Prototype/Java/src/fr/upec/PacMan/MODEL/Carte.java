@@ -78,6 +78,9 @@ public class Carte implements Rendering
 				m_behaviours.add((Behaviour)g);
 				m_entitys.add((Rendering)g);
 				break;
+			case Constant.GOME_ID:
+				Gum gum = new Gum(new Vector2(x, y), m_carteCollider);
+				m_entitys.add((Rendering)gum);
 			default:
 				break;
 		}

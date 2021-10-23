@@ -6,7 +6,7 @@ package fr.upec.PacMan.MODEL;
  * Description   : Les objects à effet qui peuve par exemple donner une amelioration à un Actor
  */
 
-public interface EffectObject
+public interface EffetObject
 {
-	void effet(Actor * user);
+	void effet(Actor user);
 }
