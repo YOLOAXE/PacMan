@@ -54,13 +54,13 @@ $(BUILD)MODEL/Gum.class: $(SRC)MODEL/Gum.java $(BUILD)MODEL/Consumable.class
 $(BUILD)MODEL/Ghost.class: $(SRC)MODEL/Ghost.java $(BUILD)MODEL/Actor.class $(BUILD)MODEL/Node.class
 	$(JC) $(JFLAGS) $(SRC)MODEL/Ghost.java
 
-$(BUILD)MODEL/Constant.class: $(SRC)MODEL/Constant.java
+$(BUILD)MODEL/Constant.class: $(SRC)MODEL/Constant.java $(BUILD)MODEL/Direction.class
 	$(JC) $(JFLAGS) $(SRC)MODEL/Constant.java
 
 $(BUILD)MODEL/Vector2.class: $(SRC)MODEL/Vector2.java
 	$(JC) $(JFLAGS) $(SRC)MODEL/Vector2.java
 
-$(BUILD)MODEL/Direction.class: $(SRC)MODEL/Direction.java
+$(BUILD)MODEL/Direction.class: $(SRC)MODEL/Direction.java $(BUILD)MODEL/Vector2.class
 	$(JC) $(JFLAGS) $(SRC)MODEL/Direction.java
 
 $(BUILD)MODEL/Consumable.class: $(SRC)MODEL/Consumable.java $(SRC)MODEL/CarteCollider.java $(BUILD)MODEL/Entity.class $(BUILD)VUE/Rendering.class

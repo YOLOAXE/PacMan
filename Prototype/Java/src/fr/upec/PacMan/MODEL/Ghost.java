@@ -12,6 +12,7 @@ public class Ghost extends Actor
 	private java.util.List<Direction> m_pathDir = new ArrayList<Direction>();
 	private Node[][] m_pathCarte;
 	private int m_indicePathDir = 0;
+	private Random random = new Random();
 
 	public Ghost(Vector2 pos,Color c,CarteCollider carteCollider)
 	{
@@ -131,5 +132,50 @@ public class Ghost extends Actor
 	public void update(float deltaTime)
 	{
 		super.update(deltaTime);
+		if(!m_nextState)
+		{
+			m_nextState = true;
+			super.m_nextDir = this.nextRandomDirection();
+		}
+	}
+
+	public int RandomRange(int min, int max) {		
+		return random.nextInt(max - min) + min;
+	}
+
+	public Direction nextRandomDirection()
+	{
+		Vector2 result = m_nextPos.additionModuloDeuxDirection(super.m_nextDir.getPosDirection(),super.m_carteCollider.getSize());	
+		boolean collide = false;
+		java.util.List<Direction> choix = new ArrayList<Direction>();
+		for (int i = 0; i < m_idWallCollide.size() && !collide; i++)
+		{
+			collide = super.m_carteCollider.getSpawnCarte(result) == m_idWallCollide.get(i);
+		}
+		if(collide)
+		{
+			for(int j =  0; j < 4;j++)
+			{
+				result = m_nextPos.additionModuloDeuxDirection(Constant.allDirection[j].getPosDirection(),super.m_carteCollider.getSize());
+				for (int i = 0; i < m_idWallCollide.size() && collide; i++)
+				{
+					collide = super.m_carteCollider.getSpawnCarte(result) == m_idWallCollide.get(i);
+				}
+				if(!collide)
+				{
+					choix.add(Constant.allDirection[j]);
+					collide = true;
+				}
+			}
+			if(choix.size() > 0)
+			{
+				return choix.get(RandomRange(0,choix.size()));
+			}
+		}
+		else
+		{
+			return super.m_nextDir;
+		}
+		return super.m_nextDir; 
 	}
 }
