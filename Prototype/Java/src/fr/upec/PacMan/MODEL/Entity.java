@@ -19,4 +19,9 @@ import java.awt.*;
 		m_id = id;
 		m_pos = pos;
 	}
+
+	public Vector2 getPosition()
+	{
+		return m_pos;
+	}
  }

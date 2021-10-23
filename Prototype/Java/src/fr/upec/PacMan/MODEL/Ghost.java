@@ -13,6 +13,13 @@ public class Ghost extends Actor
 	private Node[][] m_pathCarte;
 	private int m_indicePathDir = 0;
 	private Random random = new Random();
+	private java.util.List<Vector2> allCorrectNoWallPos = new ArrayList<Vector2>();
+	private Player m_player = null;
+
+	public void setTarget(Player p)
+	{
+		this.m_player = p;
+	}
 
 	public Ghost(Vector2 pos,Color c,CarteCollider carteCollider)
 	{
@@ -22,9 +29,8 @@ public class Ghost extends Actor
 		{
 			for (int j = 0; j < carteCollider.getH(); j++)
 			{
-				m_pathCarte[i][j] = new Node();
-				m_pathCarte[i][j].setWall(carteCollider.getSpawnCarte(new Vector2(i,j)) == Constant.WALL_ID);//TODO MODULO DEUX DIR 
-				m_pathCarte[i][j].setPos(new Vector2(i, j));				
+				m_pathCarte[i][j] = new Node(new Vector2(i, j),carteCollider.getSpawnCarte(new Vector2(i,j)) == Constant.WALL_ID);
+				//TODO MODULO DEUX DIR 				
 				if (i - 1 >= 0)
 				{
 					if (!m_pathCarte[i - 1][j].isWall())
@@ -44,11 +50,13 @@ public class Ghost extends Actor
 					}
 					if (!m_pathCarte[i][j].isWall())
 					{
-						m_pathCarte[i][j - 1].addNeighbourDirection(m_pathCarte[i][j],Direction.NORTH);						
+						m_pathCarte[i][j - 1].addNeighbourDirection(m_pathCarte[i][j],Direction.NORTH);	
+						allCorrectNoWallPos.add(new Vector2(i,j));
 					}
 				}
 			}
 		}
+		m_pathDir.add(Direction.NORTH);
 	}
 
 	Node findlowestFCost(java.util.List<Node> nodes)
@@ -90,16 +98,15 @@ public class Ghost extends Actor
 		Node target = m_pathCarte[targetPos.getIntX()][targetPos.getIntY()];
 		Node current = start;
 		current.calculeCost(start,0, target);
-		openPath.add(current);
+		openPath.add(current);		
 		boolean end = false;
 		for (int y = 0; y < super.m_carteCollider.getH(); y++)
 		{
 			for (int x = 0; x < super.m_carteCollider.getL(); x++)
 			{
-				m_pathCarte[x][y].setFCost(10000000.0f);
-				m_pathCarte[x][y].setParent(null);
+				m_pathCarte[x][y].clear();
 			}
-		}
+		}		
 		while (!end)
 		{
 			current = findlowestFCost(openPath);
@@ -132,11 +139,27 @@ public class Ghost extends Actor
 	public void update(float deltaTime)
 	{
 		super.update(deltaTime);
-		if(!m_nextState)
+		// PATH finding RANDOM
+		if (m_indicePathDir == m_pathDir.size() || !m_move)
+		{			
+			pathFinding(allCorrectNoWallPos.get(RandomRange(0,allCorrectNoWallPos.size())));//pathFinding(this.m_player.getPosition()); //Fonctionne
+			if (!m_move) { m_timerDeplacement = m_actorSpeed; }
+		}
+
+		if (!m_nextState && m_indicePathDir < m_pathDir.size())
+		{
+			m_nextState = true;
+			m_nextDir = m_pathDir.get(m_indicePathDir++);
+		}
+		// PATH finding RANDOM
+
+		// RANDOM Simple
+		/*if(!m_nextState)
 		{
 			m_nextState = true;
 			super.m_nextDir = this.nextRandomDirection();
-		}
+		}*/
+		// RANDOM Simple
 	}
 
 	public int RandomRange(int min, int max) {		

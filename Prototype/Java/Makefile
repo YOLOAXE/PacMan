@@ -51,7 +51,7 @@ $(BUILD)MODEL/Player.class: $(SRC)MODEL/Player.java $(BUILD)MODEL/Actor.class $(
 $(BUILD)MODEL/Gum.class: $(SRC)MODEL/Gum.java $(BUILD)MODEL/Consumable.class
 	$(JC) $(JFLAGS) $(SRC)MODEL/Gum.java
 
-$(BUILD)MODEL/Ghost.class: $(SRC)MODEL/Ghost.java $(BUILD)MODEL/Actor.class $(BUILD)MODEL/Node.class
+$(BUILD)MODEL/Ghost.class: $(SRC)MODEL/Ghost.java $(BUILD)MODEL/Actor.class $(BUILD)MODEL/Node.class $(BUILD)MODEL/Player.class
 	$(JC) $(JFLAGS) $(SRC)MODEL/Ghost.java
 
 $(BUILD)MODEL/Constant.class: $(SRC)MODEL/Constant.java $(BUILD)MODEL/Direction.class

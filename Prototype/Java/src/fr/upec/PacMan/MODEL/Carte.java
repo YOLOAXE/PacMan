@@ -20,10 +20,11 @@ public class Carte implements Rendering
 	private final String CHEMIN_SIMPLE_RUN = "./res/";
 	private InputStream inputStream;
 	private int fs = 0;
-	private Player player = null;
+	private Player player = null;	
 	private InfoGraphics m_infoGraphics = null;
 	private java.util.List<Behaviour> m_behaviours = new ArrayList<Behaviour>();
 	private java.util.List<Rendering> m_entitys = new ArrayList<Rendering>();
+	private java.util.List<Vector2> m_ghostPos = new ArrayList<Vector2>();
 
     public Carte(String path,InfoGraphics ig)
     {
@@ -57,6 +58,13 @@ public class Carte implements Rendering
 					createEntity(x,y,m_spawnCarte[x][y]);
 				}
 			}
+			for(Vector2 vec : m_ghostPos)
+			{
+				Ghost g = new Ghost(vec,Constant.GHOST_COLOR[fs++%Constant.GHOST_COLOR.length],m_carteCollider);
+				g.setTarget(player);
+				m_behaviours.add((Behaviour)g);
+				m_entitys.add((Rendering)g);
+			}
 			this.inputStream.close();			
 		} 
 		catch (IOException ex) 
@@ -75,9 +83,7 @@ public class Carte implements Rendering
 				m_entitys.add((Rendering)player);
 				break;
 			case Constant.GHOST_ID:
-				Ghost g = new Ghost(new Vector2(x,y),Constant.GHOST_COLOR[fs++%Constant.GHOST_COLOR.length],m_carteCollider);
-				m_behaviours.add((Behaviour)g);
-				m_entitys.add((Rendering)g);
+					m_ghostPos.add(new Vector2(x,y));
 				break;
 			case Constant.GOME_ID:
 				Gum gum = new Gum(new Vector2(x, y), m_carteCollider);

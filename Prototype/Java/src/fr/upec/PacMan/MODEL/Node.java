@@ -18,6 +18,18 @@ public class Node
 	private List<Node> neighbour = new ArrayList<Node>();	
 	private List<Direction> neighbourDir = new ArrayList<Direction>();
 
+	public Node(Vector2 p,boolean m)
+	{
+		this.pos = p;
+		this.mur = m;
+	}
+
+	public void clear()
+	{
+		f_cost= 10000000.0f;
+		parent = null;
+	}
+
 	void calculeCost(Node start,float gp_cost, Node target)
 	{
 		float g = start.getPos().Distance(pos)+ gp_cost;
@@ -39,6 +51,11 @@ public class Node
 		}
 	}
 
+	public Vector2 getPos()
+	{
+		return pos;
+	}
+
 	public float getFCost()
 	{
 		return f_cost;
@@ -49,34 +66,14 @@ public class Node
 		this.f_cost = cost;
 	}
 
-	public float getHCost()
-	{
-		return h_cost;
-	}
-
 	public float getGCost()
 	{
 		return g_cost;
 	}
 
-	public Vector2 getPos()
-	{
-		return pos;
-	}
-
-	public void setPos(Vector2 p)
-	{
-		this.pos = p;
-	}
-
 	public boolean isWall()
 	{
 		return mur;
-	}
-
-	public void setWall(boolean wall)
-	{
-		this.mur = wall;
 	}
 
 	public Node getParent()
@@ -101,8 +98,8 @@ public class Node
 
 	public void addNeighbourDirection(Node n,Direction d)
 	{
-		neighbour.add(n);
-		neighbourDir.add(d);
+		this.neighbour.add(n);
+		this.neighbourDir.add(d);
 	}
 
 	public List<Direction> getNeighbourDirection()

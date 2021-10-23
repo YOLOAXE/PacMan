@@ -8,10 +8,17 @@ package fr.upec.PacMan.MODEL;
 
  public enum Direction 
  {
-    NORTH,
-    EAST,
-    SOUTH,
-    WEST;
+    NORTH ("NORTH"),
+    EAST ("EAST"),
+    SOUTH ("SOUTH"),
+    WEST ("WEST");
+
+	private final String name;
+
+	private Direction(String n)
+	{
+		this.name = n;
+	}
 
 	private static final int DTOP[][] = { {0,-1}, {1,0}, {0,1}, {-1,0} };
 
@@ -23,5 +30,11 @@ package fr.upec.PacMan.MODEL;
 	public Vector2 getPosDirection()
 	{		
 		return new Vector2(DTOP[this.ordinal()]);
+	}
+
+	@Override
+	public String toString()
+	{
+		return this.name;
 	}
 }
