@@ -17,40 +17,60 @@ public class CarteCollider
     private int m_hauteur;
     private int m_largeur;
 	private int m_spawnCarte[][];
-    private Consumable m_consumables[][], cons;	
+    private Consumable m_consumables[][];	
+	private int consumableMax = 0;
 
-	public CarteCollider(int hauteur,int largeur,int spawnCarte[][],Consumable consumables[][])
+	public CarteCollider(int hauteur,int largeur)
 	{
-	    m_hauteur = hauteur;
-		m_largeur = largeur;
-		m_spawnCarte = spawnCarte;
-		m_consumables = consumables;
+	    this.m_hauteur = hauteur;
+		this.m_largeur = largeur;
 	}
 
-	public void setConsumableCarte(Vector2 vec,int c)
+	public void initCarte(int spawnCarte[][],Consumable consumables[][])
 	{
-		switch (c) {
-		case Constant.GOME_ID:
-			cons = new Gum(vec, this);
-			break;
-		case Constant.PAC_GOME_ORANGE_ID:
-			cons = new OrangeGum(vec, this);
-			break;
-		case Constant.PAC_GOME_VERT_ID:
-			cons = new GreenGum(vec, this);
-			break;
-		case Constant.PAC_GOME_VIOLET_ID:
-			cons = new VioletGum(vec, this);
-			break;
-		default:
-			break;
+		this.m_spawnCarte = spawnCarte;
+		this.m_consumables = consumables;
+		for(int y = 0; y < m_hauteur;y++)
+		{
+			for(int x = 0; x < m_largeur;x++)
+			{
+				if(consumables[x][y] != null)
+				{
+					consumableMax++;
+				}
+			}
 		}
-		this.m_consumables[vec.getIntX()][vec.getIntY()] = cons;
+	}
+
+	public int getMaxConsumable()
+	{
+		return consumableMax;
 	}
 
 	public void setSpawnCarte(Vector2 vec,int id)
 	{
 		this.m_spawnCarte[vec.getIntX()][vec.getIntY()] = id;
+	}
+
+	public void removeRandomWall()
+	{
+		Random random = new Random();
+		java.util.List<Vector2> allWall = new ArrayList<Vector2>();
+		for(int y = 0; y < m_hauteur;y++)
+		{
+			for(int x = 0; x < m_largeur;x++)
+			{
+				if(m_spawnCarte[x][y] == Constant.WALL_ID)
+				{
+					allWall.add(new Vector2(x,y));
+				}
+			}
+		}
+		if(allWall.size() > 0)
+		{
+			Vector2 vec = allWall.get(random.nextInt(allWall.size()));
+			m_spawnCarte[vec.getIntX()][vec.getIntY()] = 0;
+		}
 	}
 
 	public Consumable getConsumableCarte(Vector2 vec)

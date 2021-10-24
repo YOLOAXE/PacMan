@@ -68,11 +68,12 @@ public class GameManager implements Behaviour
 	@Override
 	public void update(float deltaTime)//Game management
 	{
-		if(this.m_carte.getPlayer().isDead() && !m_endGame)
+		boolean cosumeAll = this.m_carte.getPlayer().consomeCount() == this.m_carte.getCarteCollider().getMaxConsumable();
+		if(this.m_carte.getPlayer().isDead() || cosumeAll && !m_endGame)
 		{
-			if(this.m_carte.getPlayer().endGame())
+			if(this.m_carte.getPlayer().endGame() || cosumeAll)
 			{
-				this.m_gameGraphics.endGame(false);//TODO Player Win
+				this.m_gameGraphics.endGame(cosumeAll);
 				this.m_endGame = true;
 				this.m_timerRestart = 5.0f;
 			}

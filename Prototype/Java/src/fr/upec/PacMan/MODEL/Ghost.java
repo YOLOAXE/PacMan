@@ -134,14 +134,51 @@ public class Ghost extends Actor
 		}
 	}
 
+	@Override
+	public void action(int state)
+	{
+		super.action(state);
+		switch(state)
+		{
+			case Constant.STATE_ACTION_NORMAL:
+				super.m_color = Constant.GHOST_COLOR;
+				super.m_actorSpeed = Constant.BASE_SPEED;
+				break;	
+			case Constant.STATE_ACTION_INVISIBLE:
+				break;	
+			case Constant.STATE_ACTION_SUPER:
+				super.m_color = new Color(10,10,120);
+				super.m_actorSpeed = Constant.BASE_SPEED*2;
+				break;	
+			case Constant.STATE_ACTION_LABYRINTHE:
+				super.m_carteCollider.removeRandomWall();
+				break;	
+			default:
+				break;
+		}
+	}
+
     @Override
 	public void update(float deltaTime)
 	{
 		super.update(deltaTime);
 
-		if(m_player.getPosition().equalsInt(super.m_pos))
+		switch(m_state)
 		{
-			m_player.died();
+			case Constant.STATE_ACTION_NORMAL:
+				if(m_player.getPosition().equalsInt(super.m_pos))
+				{
+					m_player.died();
+				}
+				break;	
+			case Constant.STATE_ACTION_SUPER:
+				if(m_player.getPosition().equalsInt(super.m_pos))
+				{
+					this.resetSpawnPoint();
+				}
+				break;			
+			default:
+				break;
 		}
 
 		// PATH finding RANDOM

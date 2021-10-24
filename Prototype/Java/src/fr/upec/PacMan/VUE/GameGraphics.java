@@ -50,9 +50,17 @@ public class GameGraphics extends JPanel
         }			
 		if(this.m_endGame)
 		{
-			secondPinceau.setColor(Color.red);	
 			secondPinceau.setFont(new Font("serif", Font.BOLD, 60));
-			secondPinceau.drawString("GameOver", (this.getWidth()/2)-(this.getWidth()/4), this.getHeight()/2);
+			if(this.m_playerWin)
+			{
+				secondPinceau.setColor(Color.green);	
+				secondPinceau.drawString("Win", (this.getWidth()/2)-(this.getWidth()/4), this.getHeight()/2);
+			}
+			else
+			{
+				secondPinceau.setColor(Color.red);	
+				secondPinceau.drawString("GameOver", (this.getWidth()/2)-(this.getWidth()/4), this.getHeight()/2);
+			}						
 			secondPinceau.drawString(""+m_time, (this.getWidth()/2)-(this.getWidth()/4), this.getHeight()-(this.getHeight()/4));
 		}
 		else

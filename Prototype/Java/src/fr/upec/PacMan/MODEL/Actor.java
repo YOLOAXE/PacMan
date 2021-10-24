@@ -10,7 +10,7 @@ import java.util.*;
  * Description   : Le conportement des Entites en mouvement
  */
 
-public abstract class Actor extends Entity implements Behaviour,Rendering
+public abstract class Actor extends Entity implements Behaviour,Rendering,StateEffect
 {
 	protected float m_actorSpeed = Constant.BASE_SPEED;
 	protected Direction m_dir = Direction.NORTH;
@@ -23,6 +23,7 @@ public abstract class Actor extends Entity implements Behaviour,Rendering
 	protected float m_timerDeplacement = 0;
 	protected CarteCollider m_carteCollider;
 	protected java.util.List<Integer> m_idWallCollide = new ArrayList<Integer>();
+	protected int m_state = 0;
 	private boolean wraparound = false;
 
 	Actor(byte id,Vector2 pos,Color color,CarteCollider carteCollider)
@@ -36,6 +37,11 @@ public abstract class Actor extends Entity implements Behaviour,Rendering
 		m_nextPos = pos;
 	}
 
+	public void action(int state)
+	{
+		this.m_state = state;
+	}
+
 	public void resetSpawnPoint()
 	{
 		m_currentPos = m_spawnPoint;
@@ -47,12 +53,6 @@ public abstract class Actor extends Entity implements Behaviour,Rendering
 		m_timerDeplacement = 0.0f;	
 		Vector2 result = m_currentPos.additionModuloDeuxDirection(dir.getPosDirection(),this.m_carteCollider.getSize());
 		this.wraparound = !result.equalsInt(m_currentPos.addition(dir.getPosDirection()));
-		
-		if(super.m_id == Constant.PLAYER_ID) {
-			Consumable cons = m_carteCollider.getConsumableCarte(m_currentPos);
-			cons.m_isEaten = true;
-		}
-		
 		boolean collide = false;
 		for (int i = 0; i < m_idWallCollide.size() && !collide; i++)
 		{
@@ -79,6 +79,9 @@ public abstract class Actor extends Entity implements Behaviour,Rendering
 	public void reset()
 	{
 		this.resetSpawnPoint();
+		this.m_dir = Direction.NORTH;
+		this.m_nextDir = Direction.NORTH;
+		this.m_actorSpeed = Constant.BASE_SPEED;
 	}
 
 	@Override

@@ -41,12 +41,12 @@ public class InfoGraphics extends JPanel
         }		
 		secondPinceau.setColor(Color.white);	
 		secondPinceau.setFont(new Font("serif", Font.BOLD, 20));
-		secondPinceau.drawString("LIFE:", 0, 20);
-		secondPinceau.drawString("SCORE: " + point, 0, 2*(this.getWidth()/4));
+		secondPinceau.drawString("LIFE:", 5, 20);
+		secondPinceau.drawString("SCORE: " + point, 5, 2*(this.getWidth()/2));
 		pinceau.setColor(Constant.PACMAN_COLOR);		
 		for(int i = 0 ; i < vie;i++)
 		{
-			pinceau.fillOval(i*(this.getWidth()/3) , this.getWidth()/6 , this.getWidth()/5, this.getWidth()/5);
+			pinceau.fillOval((i%3)*(this.getWidth()/3) , ((int)(i/3)+1)*(this.getWidth()/4) , this.getWidth()/5, this.getWidth()/5);
 		}
 	}
 }
